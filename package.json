@@ -2,19 +2,21 @@
   "name": "applywell",
   "version": "0.1.0",
   "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "npx @cloudflare/next-on-pages",
-    "start": "next start"
-  },
+"scripts": 
+{
+  "dev": "next dev",
+  "build": "next build",
+  "start": "next start",
+  "lint": "next lint"
+}
   "dependencies": {
     "@clerk/nextjs": "^6.38.3",
     "docx": "^9.6.0",
     "html2canvas": "^1.4.1",
     "jspdf": "^4.2.0",
     "next": "15.2.3",
-    "react": "^19",
-    "react-dom": "^19"
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
   },
   "devDependencies": {
     "@cloudflare/next-on-pages": "1",
