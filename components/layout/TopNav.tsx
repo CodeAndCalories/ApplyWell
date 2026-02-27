@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useApp } from "@/lib/context";
 import { useState } from "react";
+import { useUser, SignOutButton } from "@clerk/nextjs";
 
 const NAV = [
   { href: "/dashboard", label: "Home", icon: "🏠" },
@@ -29,6 +30,7 @@ export default function TopNav() {
   const router = useRouter();
   const { state, deleteAllData } = useApp();
   const [menuOpen, setMenuOpen] = useState(false);
+  const { user } = useUser();
 
   if (pathname === "/" || pathname.startsWith("/preview") ||
       pathname.startsWith("/sign-in") || pathname.startsWith("/sign-up")) return null;
@@ -37,6 +39,12 @@ export default function TopNav() {
     ["essay","export","profile"].some(p => pathname === "/" + p);
 
   const title = PAGE_TITLES[pathname] || "ApplyWell";
+
+  // Prefer Clerk user info, fall back to local profile
+  const displayName = user?.firstName || state.profile.name || "Student";
+  const displayEmail = user?.primaryEmailAddress?.emailAddress || state.profile.school || "";
+  const avatarInitial = displayName[0]?.toUpperCase() || "A";
+  const avatarUrl = user?.imageUrl;
 
   return (
     <div className="sticky top-0 z-50 bg-zinc-950/95 backdrop-blur border-b border-zinc-800">
@@ -76,8 +84,10 @@ export default function TopNav() {
         {/* Right: menu */}
         <div className="relative flex-shrink-0">
           <button onClick={() => setMenuOpen(o => !o)}
-            className="w-8 h-8 rounded-full bg-zinc-800 border border-zinc-700 flex items-center justify-center text-zinc-400 hover:text-zinc-200 transition-colors text-sm font-semibold">
-            {state.profile.name?.[0]?.toUpperCase() || "☰"}
+            className="w-8 h-8 rounded-full bg-zinc-800 border border-zinc-700 flex items-center justify-center text-zinc-400 hover:text-zinc-200 transition-colors text-sm font-semibold overflow-hidden">
+            {avatarUrl
+              ? <img src={avatarUrl} alt={displayName} className="w-full h-full object-cover" />
+              : avatarInitial}
           </button>
 
           {menuOpen && (
@@ -85,8 +95,8 @@ export default function TopNav() {
               <div className="fixed inset-0 z-40" onClick={() => setMenuOpen(false)} />
               <div className="absolute right-0 top-10 z-50 w-56 bg-zinc-900 border border-zinc-700 rounded-xl shadow-2xl overflow-hidden">
                 <div className="px-4 py-3 border-b border-zinc-800">
-                  <div className="text-sm font-semibold">{state.profile.name || "Student"}</div>
-                  <div className="text-xs text-zinc-500">{state.profile.school || "No school set"}</div>
+                  <div className="text-sm font-semibold">{displayName}</div>
+                  <div className="text-xs text-zinc-500 truncate">{displayEmail}</div>
                 </div>
                 {[
                   { href: "/profile", label: "👤 My Profile" },
@@ -100,16 +110,19 @@ export default function TopNav() {
                   </Link>
                 ))}
                 <div className="border-t border-zinc-800">
-                  <Link href="/" onClick={() => setMenuOpen(false)}
-                    className="block px-4 py-2.5 text-sm text-zinc-400 hover:bg-zinc-800 transition-colors">
-                    🏠 Back to Landing Page
-                  </Link>
                   <button onClick={() => {
                     setMenuOpen(false);
                     if (confirm("Clear all data and start fresh?")) { deleteAllData(); router.push("/"); }
                   }} className="w-full text-left px-4 py-2.5 text-sm text-amber-400 hover:bg-zinc-800 transition-colors">
                     🔄 Clear & Start Over
                   </button>
+                  <SignOutButton redirectUrl="/">
+                    <button
+                      onClick={() => setMenuOpen(false)}
+                      className="w-full text-left px-4 py-2.5 text-sm text-zinc-400 hover:bg-zinc-800 transition-colors">
+                      🚪 Sign Out
+                    </button>
+                  </SignOutButton>
                 </div>
               </div>
             </>

@@ -2,16 +2,22 @@
 
 import { useRouter } from "next/navigation";
 import { useApp } from "@/lib/context";
+import { useAuth } from "@clerk/nextjs";
 
 export default function LandingPage() {
   const { loadDemo } = useApp();
   const router = useRouter();
+  const { isSignedIn } = useAuth();
 
   const handleMode = async (mode: "resume" | "college", demo = false) => {
     if (demo) await loadDemo();
-    // Store chosen mode
     localStorage.setItem("applywell_mode", mode);
-    router.push("/dashboard");
+    if (isSignedIn) {
+      router.push("/dashboard");
+    } else {
+      // Store chosen mode, then go to sign-up
+      router.push("/sign-up");
+    }
   };
 
   return (
@@ -22,7 +28,7 @@ export default function LandingPage() {
           <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-400 to-amber-400 flex items-center justify-center text-zinc-900 font-bold text-base">A</div>
           <span className="font-serif text-lg">ApplyWell</span>
         </div>
-        <button onClick={() => router.push("/dashboard")}
+        <button onClick={() => router.push("/sign-in")}
           className="text-xs text-zinc-500 hover:text-zinc-300 border border-zinc-800 rounded-lg px-3 py-1.5 transition-colors">
           Sign In
         </button>
@@ -119,7 +125,7 @@ export default function LandingPage() {
       {/* Footer disclaimer */}
       <div className="pb-8 text-xs text-zinc-600 text-center leading-relaxed">
         Writing tool only — not admissions advice. No outcome guarantees.<br />
-        Data stored locally in your browser.
+        Free account required · Data synced to your account.
       </div>
     </div>
   );
