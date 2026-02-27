@@ -1,9 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: "export",
+  // Removed "output: export" — incompatible with Clerk and SSR routes.
+  // Cloudflare Pages uses @cloudflare/next-on-pages for dynamic Next.js apps.
   images: { unoptimized: true },
-  trailingSlash: true,
 };
 
 export default nextConfig;
