@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { AppProvider } from "@/lib/context";
-import BottomNav from "@/components/layout/BottomNav";
-import TopBar from "@/components/layout/TopBar";
+import TopNav from "@/components/layout/TopNav";
 import SavedIndicator from "@/components/layout/SavedIndicator";
 
 export const metadata: Metadata = {
   title: "ApplyWell — Honest College Application Support",
-  description: "Build a polished college resume and craft compelling application materials — without fabricating anything.",
+  description: "Build a polished college resume and craft compelling application materials.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -21,9 +20,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="bg-zinc-950 text-zinc-100 antialiased min-h-screen">
         <AppProvider>
           <SavedIndicator />
-          <TopBar />
-          <main className="pb-20 max-w-xl mx-auto px-4">{children}</main>
-          <BottomNav />
+          <TopNav />
+          <main className="max-w-xl mx-auto px-4 pb-8">{children}</main>
         </AppProvider>
       </body>
     </html>
