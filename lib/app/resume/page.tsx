@@ -37,7 +37,7 @@ export default function ResumePage() {
     setExporting(true);
     try {
       const { exportResumePDF } = await import("@/lib/pdf/pdfExport");
-      await exportResumePDF(state, template, `resume-${template}.pdf`);
+      await exportResumePDF("resume-paper", `resume-${template}.pdf`);
     } catch (e) {
       console.error(e);
       alert("PDF export failed. Check console for details.");
