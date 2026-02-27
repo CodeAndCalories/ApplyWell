@@ -1,0 +1,78 @@
+{
+  "profile": {
+    "name": "Alex Rivera",
+    "grade": "12",
+    "school": "Westlake High School",
+    "interests": "Computer Science, Environmental Science, Creative Writing",
+    "gpa": "3.9",
+    "email": "alex@example.com"
+  },
+  "entries": [
+    {
+      "id": "demo_e1",
+      "type": "Activity",
+      "title": "Robotics Club Captain",
+      "org": "Westlake Robotics Team",
+      "startDate": "2022-09",
+      "endDate": "",
+      "hrsPerWeek": "10",
+      "weeksPerYear": "36",
+      "description": "Led team of 12 students to regional championship. Mentored underclassmen in programming and mechanical design.",
+      "notes": "Won regional competition 2023. Designed autonomous navigation system using Python.",
+      "bullets": [
+        "Led 12-member team to regional championship, designing Python-based autonomous navigation system",
+        "Mentored 6 underclassmen in programming fundamentals, improving team retention by 40%"
+      ],
+      "verified": true
+    },
+    {
+      "id": "demo_e2",
+      "type": "Volunteer",
+      "title": "Environmental Cleanup Organizer",
+      "org": "Green Earth Initiative",
+      "startDate": "2021-06",
+      "endDate": "",
+      "hrsPerWeek": "4",
+      "weeksPerYear": "20",
+      "description": "Organized monthly beach cleanups and recruited volunteers from local schools and businesses.",
+      "notes": "Collected 2,000+ lbs of debris over 2 years. Grew volunteer base from 10 to 50+ people.",
+      "bullets": [
+        "Organized 24 beach cleanup events collecting 2,000+ lbs of debris over two years",
+        "Grew volunteer base from 10 to 50+ participants through social media outreach"
+      ],
+      "verified": true
+    },
+    {
+      "id": "demo_e3",
+      "type": "Award",
+      "title": "National Merit Scholarship Semifinalist",
+      "org": "National Merit Scholarship Corporation",
+      "startDate": "2023-09",
+      "endDate": "2023-09",
+      "hrsPerWeek": "",
+      "weeksPerYear": "",
+      "description": "Recognized as top 1% of PSAT scorers nationally based on 2022 PSAT/NMSQT score.",
+      "notes": "",
+      "bullets": [],
+      "verified": true
+    },
+    {
+      "id": "demo_e4",
+      "type": "Work",
+      "title": "Coding Tutor",
+      "org": "Self-employed",
+      "startDate": "2022-06",
+      "endDate": "",
+      "hrsPerWeek": "6",
+      "weeksPerYear": "40",
+      "description": "Tutored 8 middle school students in Python programming and web development basics.",
+      "notes": "All 8 students passed their intro CS courses. Earned $1,200 over the year.",
+      "bullets": [
+        "Tutored 8 middle school students in Python and HTML/CSS; all passed intro CS courses",
+        "Designed custom lesson plans tailored to each student's learning pace and goals"
+      ],
+      "verified": false
+    }
+  ],
+  "drafts": {}
+}
