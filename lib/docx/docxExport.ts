@@ -106,14 +106,21 @@ export async function exportResumeDOCX(
     children.push(hrPara());
 
     for (const entry of items) {
-      const dateStr = `${formatDate(entry.startDate)} – ${formatDate(entry.endDate)}`;
+      const dateStr = (() => {
+        const s = entry.startDate ? formatDate(entry.startDate) : null;
+        const e = entry.endDate ? formatDate(entry.endDate) : null;
+        if (!s && !e) return null;
+        if (s && !e) return `${s} – Present`;
+        if (!s && e) return e;
+        return `${s} – ${e}`;
+      })();
 
       children.push(
         new Paragraph({
           spacing: sp(80, 0),
           children: [
             new TextRun({ text: entry.title, bold: true, size: 22 }),
-            new TextRun({ text: `   ${dateStr}`, size: 18, color: "666666" }),
+            ...(dateStr ? [new TextRun({ text: `   ${dateStr}`, size: 18, color: "666666" })] : []),
           ],
         })
       );

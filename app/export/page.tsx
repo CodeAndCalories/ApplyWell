@@ -272,16 +272,21 @@ export default function ExportPage() {
         </div>
       ) : (
         <div className="bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-4 mb-4">
-          <p className="text-sm text-zinc-400 mb-3">
-            Free exports include a small watermark.{" "}
-            <span className="text-zinc-300">Upgrade to remove it.</span>
+          <p className="text-sm text-zinc-300 font-medium mb-1">
+            Free preview includes watermark.
+          </p>
+          <p className="text-sm text-zinc-500 mb-3">
+            Upgrade once to export clean PDFs and Word files.
           </p>
           <a
             href={STRIPE_URL}
-            className="block w-full bg-emerald-400 hover:bg-emerald-300 text-zinc-900 font-semibold rounded-xl py-2 text-sm transition-colors text-center"
+            className="block w-full bg-emerald-400 hover:bg-emerald-300 text-zinc-900 font-semibold rounded-xl py-2 text-sm transition-colors text-center mb-2"
           >
             Upgrade — $39
           </a>
+          <p className="text-xs text-zinc-600 text-center">
+            $39 one-time — lifetime access. No subscription.
+          </p>
         </div>
       )}
 

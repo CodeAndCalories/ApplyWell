@@ -5,8 +5,8 @@ import TopNav from "@/components/layout/TopNav";
 import SavedIndicator from "@/components/layout/SavedIndicator";
 
 export const metadata: Metadata = {
-  title: "ApplyWell — Honest College Application Support",
-  description: "Build a polished college resume and craft compelling application materials.",
+  title: "ApplyWell | Resume & College Application Builder",
+  description: "ApplyWell helps students and job seekers build professional resumes and college applications. Free preview. One-time upgrade. No subscription.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

@@ -69,10 +69,14 @@ export default function LandingPage() {
           </span>
         </div>
 
-        <h1 className="font-serif text-[clamp(36px,9vw,54px)] leading-[1.05] mt-4 mb-4">
+        <h1 className="font-serif text-[clamp(36px,9vw,54px)] leading-[1.05] mt-4 mb-3">
           Your story,{" "}
           <span className="text-emerald-400 italic">honestly told.</span>
         </h1>
+
+        <p className="text-zinc-500 text-sm text-center mb-4">
+          Free preview. One-time upgrade. No subscription.
+        </p>
 
         <p className="text-zinc-400 text-base leading-relaxed mb-10 max-w-sm">
           Build polished college application materials — verified by you, never fabricated.
@@ -191,7 +195,8 @@ export default function LandingPage() {
 
       <div className="pb-8 text-xs text-zinc-600 text-center leading-relaxed">
         Writing tool only — not admissions advice. No outcome guarantees.<br />
-        Data stays in your browser. Nothing is sent to a server.
+        Data stays in your browser. Nothing is sent to a server.<br />
+        <span className="mt-1 block">Built for students and job seekers.</span>
       </div>
     </div>
   );

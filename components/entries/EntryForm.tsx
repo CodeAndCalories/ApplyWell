@@ -69,11 +69,11 @@ export default function EntryForm({ initial }: Props) {
 
         <Field label="Title / Role *">
           <input value={form.title} onChange={(e) => set("title", e.target.value)}
-            placeholder={form.type === "Award" ? "e.g. National Merit Semifinalist" : "e.g. Robotics Club Captain"} />
+            placeholder={form.type === "Award" ? "e.g. National Merit Semifinalist" : "e.g. Robotics Club Captain or Sales Associate"} />
         </Field>
 
-        <Field label="Organization / School / Company">
-          <input value={form.org} onChange={(e) => set("org", e.target.value)} placeholder="e.g. Westlake High School" />
+        <Field label="Organization / Company">
+          <input value={form.org} onChange={(e) => set("org", e.target.value)} placeholder="e.g. Westlake High School or Target" />
         </Field>
 
         <div className="grid grid-cols-2 gap-3">

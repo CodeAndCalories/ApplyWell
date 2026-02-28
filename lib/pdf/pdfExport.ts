@@ -131,12 +131,21 @@ export async function exportResumePDF(
       doc.setFont(font, "bold");
       doc.setFontSize(11);
       doc.text(entry.title, margin, y);
-      const dateStr = `${formatDate(entry.startDate)} – ${formatDate(entry.endDate)}`;
-      doc.setFont(font, "normal");
-      doc.setFontSize(9.5);
-      doc.setTextColor(80, 80, 80);
-      doc.text(dateStr, pageW - margin, y, { align: "right" });
-      doc.setTextColor(0, 0, 0);
+      const dateStr = (() => {
+        const s = entry.startDate ? formatDate(entry.startDate) : null;
+        const e = entry.endDate ? formatDate(entry.endDate) : null;
+        if (!s && !e) return null;
+        if (s && !e) return `${s} – Present`;
+        if (!s && e) return e;
+        return `${s} – ${e}`;
+      })();
+      if (dateStr) {
+        doc.setFont(font, "normal");
+        doc.setFontSize(9.5);
+        doc.setTextColor(80, 80, 80);
+        doc.text(dateStr, pageW - margin, y, { align: "right" });
+        doc.setTextColor(0, 0, 0);
+      }
       y += 13;
 
       // Org
@@ -190,17 +199,6 @@ export async function exportResumePDF(
       doc.setTextColor(0, 0, 0);
       doc.text("PREVIEW ONLY", pageW / 2, pageH / 2, { align: "center", angle: 45 });
       doc.restoreGraphicsState();
-      // Small footer attribution
-      doc.setFont("helvetica", "normal");
-      doc.setFontSize(7.5);
-      doc.setTextColor(180, 180, 180);
-      doc.text(
-        "Created with ApplyWell \u2022 applywell.pages.dev",
-        pageW / 2,
-        pageH - 20,
-        { align: "center" }
-      );
-      doc.setTextColor(0, 0, 0);
     }
   }
 
