@@ -13,7 +13,8 @@ function formatDate(d: string) {
 export async function exportResumePDF(
   state: AppState,
   template: "classic" | "modern" = "classic",
-  filename = "resume.pdf"
+  filename = "resume.pdf",
+  isPro = false
 ): Promise<void> {
   const { default: jsPDF } = await import("jspdf");
   
@@ -174,6 +175,24 @@ export async function exportResumePDF(
     }
 
     y += 2; // consistent gap after each section
+  }
+
+  // ── Watermark (free only) ─────────────────────────────────────────────────
+  if (!isPro) {
+    const totalPages = (doc.internal as unknown as { getNumberOfPages: () => number }).getNumberOfPages();
+    for (let p = 1; p <= totalPages; p++) {
+      doc.setPage(p);
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(7.5);
+      doc.setTextColor(180, 180, 180);
+      doc.text(
+        "Created with ApplyWell \u2022 applywell.pages.dev",
+        pageW / 2,
+        pageH - 20,
+        { align: "center" }
+      );
+      doc.setTextColor(0, 0, 0);
+    }
   }
 
   doc.save(filename);

@@ -18,7 +18,8 @@ function sp(before = 0, after = 0) {
 
 export async function exportResumeDOCX(
   state: AppState,
-  filename = "resume.docx"
+  filename = "resume.docx",
+  isPro = false
 ): Promise<void> {
   const {
     Document, Packer, Paragraph, TextRun, AlignmentType,
@@ -162,6 +163,24 @@ export async function exportResumeDOCX(
 
       children.push(spacer(40));
     }
+  }
+
+  // ── Watermark (free only) ─────────────────────────────────────────────────
+  if (!isPro) {
+    children.push(spacer(40));
+    children.push(
+      new Paragraph({
+        alignment: AlignmentType.CENTER,
+        spacing: sp(120, 0),
+        children: [
+          new TextRun({
+            text: "Created with ApplyWell \u2022 applywell.pages.dev",
+            size: 14,
+            color: "AAAAAA",
+          }),
+        ],
+      })
+    );
   }
 
   const doc = new Document({ sections: [{ properties: {}, children }] });

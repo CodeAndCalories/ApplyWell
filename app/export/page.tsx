@@ -1,11 +1,13 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useApp } from "@/lib/context";
 import { Disclaimer } from "@/components/ui";
 import { scoreResume } from "@/lib/score";
 import { parseBackupFile, mergeAppState } from "@/lib/storage/backup";
 import { saveState, loadState } from "@/lib/storage/localStorage";
+
+const STRIPE_URL = "https://buy.stripe.com/6oUbIUg3odx2dMUbdN1oI09";
 
 // ── Toast ─────────────────────────────────────────────────────────────────────
 function Toast({ message, onDone }: { message: string; onDone: () => void }) {
@@ -26,6 +28,7 @@ export default function ExportPage() {
   const [copied, setCopied] = useState(false);
   const [exporting, setExporting] = useState<string | null>(null);
   const [toast, setToast] = useState<string | null>(null);
+  const [isPro, setIsPro] = useState(false);
 
   // Import state
   const [importMode, setImportMode] = useState<"merge" | "replace">("merge");
@@ -37,6 +40,10 @@ export default function ExportPage() {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const { score, grade, checks, suggestions } = scoreResume(state);
+
+  useEffect(() => {
+    setIsPro(localStorage.getItem("applywell_pro") === "true");
+  }, []);
 
   const gradeColor =
     grade === "A" ? "text-emerald-400" :
@@ -57,7 +64,7 @@ export default function ExportPage() {
     setExporting(template);
     try {
       const { exportResumePDF } = await import("@/lib/pdf/pdfExport");
-      await exportResumePDF(state, template, `applywell-resume-${template}.pdf`);
+      await exportResumePDF(state, template, `applywell-resume-${template}.pdf`, isPro);
       showToast(`PDF (${template}) downloaded`);
     } catch (e) {
       console.error(e);
@@ -72,7 +79,7 @@ export default function ExportPage() {
     setExporting("docx");
     try {
       const { exportResumeDOCX } = await import("@/lib/docx/docxExport");
-      await exportResumeDOCX(state, "applywell-resume.docx");
+      await exportResumeDOCX(state, "applywell-resume.docx", isPro);
       showToast("Word document downloaded");
     } catch (e) {
       console.error(e);
@@ -288,6 +295,36 @@ export default function ExportPage() {
           </div>
         )}
       </div>
+
+      {/* ── Pro status box ──────────────────────────────────────────────────── */}
+      {isPro ? (
+        <div className="bg-emerald-500/10 border border-emerald-500/25 rounded-xl px-4 py-3 mb-4 flex items-center gap-2">
+          <span className="text-emerald-400 flex-shrink-0">✓</span>
+          <span className="text-sm text-emerald-300 font-medium">Pro enabled — clean exports unlocked.</span>
+        </div>
+      ) : (
+        <div className="bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-4 mb-4">
+          <p className="text-sm text-zinc-400 mb-3">
+            Free exports include a small watermark.{" "}
+            <span className="text-zinc-300">Upgrade to remove it.</span>
+          </p>
+          <div className="flex gap-2">
+            <a
+              href={STRIPE_URL}
+              className="flex-1 bg-emerald-400 hover:bg-emerald-300 text-zinc-900 font-semibold rounded-xl py-2 text-sm transition-colors text-center"
+            >
+              Upgrade — $39
+            </a>
+            <button
+              onClick={() => {}}
+              className="flex-1 border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:border-zinc-600 rounded-xl py-2 text-sm transition-colors"
+              aria-label="Continue with watermark"
+            >
+              Export with watermark
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* ── Resume download actions ──────────────────────────────────────────── */}
       {entries.length === 0 && (
