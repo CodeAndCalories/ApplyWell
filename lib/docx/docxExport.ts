@@ -167,11 +167,31 @@ export async function exportResumeDOCX(
 
   // ── Watermark (free only) ─────────────────────────────────────────────────
   if (!isPro) {
-    children.push(spacer(40));
+    // Insert a loud watermark block near the TOP (before header content reads naturally,
+    // we prepend to children after building — easier to append at logical break points)
+    const watermarkPara = (): DocChild =>
+      new Paragraph({
+        alignment: AlignmentType.CENTER,
+        spacing: sp(40, 40),
+        children: [
+          new TextRun({
+            text: "\u2014\u2014\u2014  PREVIEW ONLY \u2014 NOT FOR SUBMISSION  \u2014\u2014\u2014",
+            bold: true,
+            size: 28,
+            color: "CC0000",
+          }),
+        ],
+      });
+
+    // Prepend watermark after name header (insert at index 1 so name stays first)
+    children.splice(1, 0, watermarkPara());
+
+    // Append watermark + attribution at the end
+    children.push(watermarkPara());
     children.push(
       new Paragraph({
         alignment: AlignmentType.CENTER,
-        spacing: sp(120, 0),
+        spacing: sp(20, 0),
         children: [
           new TextRun({
             text: "Created with ApplyWell \u2022 applywell.pages.dev",

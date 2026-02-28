@@ -179,9 +179,18 @@ export async function exportResumePDF(
 
   // ── Watermark (free only) ─────────────────────────────────────────────────
   if (!isPro) {
+    const { GState } = await import("jspdf");
     const totalPages = (doc.internal as unknown as { getNumberOfPages: () => number }).getNumberOfPages();
     for (let p = 1; p <= totalPages; p++) {
       doc.setPage(p);
+      doc.saveGraphicsState();
+      doc.setGState(new GState({ opacity: 0.08 }));
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(72);
+      doc.setTextColor(0, 0, 0);
+      doc.text("PREVIEW ONLY", pageW / 2, pageH / 2, { align: "center", angle: 45 });
+      doc.restoreGraphicsState();
+      // Small footer attribution
       doc.setFont("helvetica", "normal");
       doc.setFontSize(7.5);
       doc.setTextColor(180, 180, 180);

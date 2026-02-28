@@ -7,6 +7,8 @@ import { scoreResume } from "@/lib/score";
 import { parseBackupFile, mergeAppState } from "@/lib/storage/backup";
 import { saveState, loadState } from "@/lib/storage/localStorage";
 
+import Link from "next/link";
+
 const STRIPE_URL = "https://buy.stripe.com/6oUbIUg3odx2dMUbdN1oI09";
 
 // ── Toast ─────────────────────────────────────────────────────────────────────
@@ -23,9 +25,8 @@ function Toast({ message, onDone }: { message: string; onDone: () => void }) {
 
 export default function ExportPage() {
   const { state } = useApp();
-  const { profile, entries } = state;
+  const { entries } = state;
 
-  const [copied, setCopied] = useState(false);
   const [exporting, setExporting] = useState<string | null>(null);
   const [toast, setToast] = useState<string | null>(null);
   const [isPro, setIsPro] = useState(false);
@@ -87,31 +88,6 @@ export default function ExportPage() {
     } finally {
       setExporting(null);
     }
-  };
-
-  // ── Plain text ────────────────────────────────────────────────────────────
-  const copyText = async () => {
-    const text = [
-      profile.name?.toUpperCase() || "STUDENT NAME",
-      profile.school,
-      profile.gpa && `GPA: ${profile.gpa}`,
-      "",
-      ...entries.map((e) =>
-        [
-          `${e.type.toUpperCase()}: ${e.title}${e.org ? ` | ${e.org}` : ""}`,
-          e.description && `  ${e.description}`,
-          ...(e.bullets || []).map((b) => `  • ${b}`),
-        ]
-          .filter(Boolean)
-          .join("\n")
-      ),
-    ]
-      .filter(Boolean)
-      .join("\n\n");
-    await navigator.clipboard.writeText(text);
-    setCopied(true);
-    showToast("Copied to clipboard");
-    setTimeout(() => setCopied(false), 2500);
   };
 
   // ── JSON backup ───────────────────────────────────────────────────────────
@@ -206,19 +182,19 @@ export default function ExportPage() {
       color: "text-sky-400 bg-sky-400/10",
       action: exportDOCX,
     },
-    {
-      id: "copy",
-      icon: copied ? "✅" : "📋",
-      label: copied ? "Copied!" : "Copy as Plain Text",
-      sub: "Paste anywhere",
-      color: "text-amber-400 bg-amber-400/10",
-      action: copyText,
-    },
   ];
 
   return (
     <div className="py-8 animate-fade-in">
       {toast && <Toast message={toast} onDone={() => setToast(null)} />}
+
+      {/* ── Back link ───────────────────────────────────────────────────────── */}
+      <Link
+        href="/resume"
+        className="inline-flex items-center gap-1.5 text-sm text-zinc-500 hover:text-zinc-300 transition-colors mb-6"
+      >
+        ← Back to Resume
+      </Link>
 
       <h1 className="font-serif text-2xl mb-2">Export</h1>
       <p className="text-zinc-500 text-sm mb-6">
