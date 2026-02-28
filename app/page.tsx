@@ -49,11 +49,16 @@ export default function LandingPage() {
           <p className="text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-3">Choose your goal</p>
           <div className="grid grid-cols-1 gap-3">
 
+            {/* Resume card — primary */}
             <button onClick={() => handleMode("resume")}
-              className="group bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 hover:border-emerald-400/50 rounded-2xl p-5 text-left transition-all">
+              className="group bg-zinc-900 hover:bg-zinc-800 border border-emerald-400/30 hover:border-emerald-400/60 rounded-2xl p-5 text-left transition-all relative">
+              {/* Most popular badge */}
+              <span className="absolute top-3.5 right-3.5 text-xs bg-emerald-400/15 text-emerald-400 border border-emerald-400/25 px-2 py-0.5 rounded-full font-semibold">
+                Most popular
+              </span>
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-xl bg-emerald-400/10 border border-emerald-400/20 flex items-center justify-center text-2xl flex-shrink-0">📄</div>
-                <div className="flex-1">
+                <div className="flex-1 pr-20">
                   <div className="font-semibold text-base mb-1 group-hover:text-emerald-400 transition-colors">Build My Resume</div>
                   <div className="text-zinc-500 text-sm leading-relaxed">ATS-friendly one-page resume. Perfect for scholarships, jobs, programs, and college applications.</div>
                   <div className="flex gap-2 mt-3 flex-wrap">
@@ -62,15 +67,20 @@ export default function LandingPage() {
                     ))}
                   </div>
                 </div>
-                <div className="text-zinc-600 group-hover:text-emerald-400 transition-colors text-lg">→</div>
+                <div className="text-zinc-600 group-hover:text-emerald-400 transition-colors text-lg absolute bottom-5 right-4">→</div>
               </div>
             </button>
 
+            {/* College Application card */}
             <button onClick={() => handleMode("college")}
-              className="group bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 hover:border-amber-400/50 rounded-2xl p-5 text-left transition-all">
+              className="group bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 hover:border-amber-400/50 rounded-2xl p-5 text-left transition-all relative">
+              {/* Coming soon label */}
+              <span className="absolute top-3.5 right-3.5 text-xs bg-zinc-800 text-zinc-500 border border-zinc-700 px-2 py-0.5 rounded-full font-medium">
+                Coming soon
+              </span>
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-xl bg-amber-400/10 border border-amber-400/20 flex items-center justify-center text-2xl flex-shrink-0">🎓</div>
-                <div className="flex-1">
+                <div className="flex-1 pr-20">
                   <div className="font-semibold text-base mb-1 group-hover:text-amber-400 transition-colors">College Application</div>
                   <div className="text-zinc-500 text-sm leading-relaxed">Common App activities, 150-char descriptions, and personal statement brainstorming.</div>
                   <div className="flex gap-2 mt-3 flex-wrap">
@@ -79,10 +89,55 @@ export default function LandingPage() {
                     ))}
                   </div>
                 </div>
-                <div className="text-zinc-600 group-hover:text-amber-400 transition-colors text-lg">→</div>
+                <div className="text-zinc-600 group-hover:text-amber-400 transition-colors text-lg absolute bottom-5 right-4">→</div>
               </div>
             </button>
           </div>
+        </div>
+
+        {/* ── Pricing card ──────────────────────────────────────────────────── */}
+        <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-5 mb-4">
+          <div className="flex items-center gap-2 mb-3">
+            <span className="text-xs bg-amber-400/15 text-amber-400 border border-amber-400/20 px-2.5 py-0.5 rounded-full font-semibold">
+              Early Access
+            </span>
+          </div>
+
+          <div className="flex items-end justify-between mb-4">
+            <div>
+              <div className="font-semibold text-base">Resume Builder</div>
+              <div className="text-zinc-500 text-xs mt-0.5">One-time purchase · no subscription</div>
+            </div>
+            <div className="text-right">
+              <div className="font-serif text-2xl text-zinc-100">$39</div>
+              <div className="text-zinc-500 text-xs">one-time</div>
+            </div>
+          </div>
+
+          <ul className="flex flex-col gap-2 mb-5">
+            {[
+              "ATS-friendly resume builder",
+              "Resume score + improvement suggestions",
+              "PDF + DOCX export",
+              "Backup + import",
+              "Future AI bullet optimizer included",
+            ].map((item) => (
+              <li key={item} className="flex items-start gap-2 text-sm text-zinc-400">
+                <span className="text-emerald-400 flex-shrink-0 mt-px">✓</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+
+          <button
+            onClick={() => handleMode("resume")}
+            className="w-full bg-emerald-400 hover:bg-emerald-300 text-zinc-900 font-semibold rounded-xl py-3 text-sm transition-colors"
+          >
+            Open Resume Builder
+          </button>
+          <p className="text-center text-xs text-zinc-600 mt-2">
+            No account required. Works in your browser.
+          </p>
         </div>
 
         {/* Demo option */}
