@@ -191,20 +191,12 @@ export default function ExportPage() {
 
   const resumeActions = [
     {
-      id: "pdf-classic",
+      id: "pdf",
       icon: "📄",
-      label: "Download PDF — Classic",
-      sub: "ATS-friendly serif layout",
+      label: "Download PDF",
+      sub: "ATS-friendly professional layout",
       color: "text-emerald-400 bg-emerald-400/10",
       action: () => exportPDF("classic"),
-    },
-    {
-      id: "pdf-modern",
-      icon: "📐",
-      label: "Download PDF — Modern",
-      sub: "Clean sans-serif layout",
-      color: "text-indigo-400 bg-indigo-400/10",
-      action: () => exportPDF("modern"),
     },
     {
       id: "docx",
@@ -308,21 +300,12 @@ export default function ExportPage() {
             Free exports include a small watermark.{" "}
             <span className="text-zinc-300">Upgrade to remove it.</span>
           </p>
-          <div className="flex gap-2">
-            <a
-              href={STRIPE_URL}
-              className="flex-1 bg-emerald-400 hover:bg-emerald-300 text-zinc-900 font-semibold rounded-xl py-2 text-sm transition-colors text-center"
-            >
-              Upgrade — $39
-            </a>
-            <button
-              onClick={() => {}}
-              className="flex-1 border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:border-zinc-600 rounded-xl py-2 text-sm transition-colors"
-              aria-label="Continue with watermark"
-            >
-              Export with watermark
-            </button>
-          </div>
+          <a
+            href={STRIPE_URL}
+            className="block w-full bg-emerald-400 hover:bg-emerald-300 text-zinc-900 font-semibold rounded-xl py-2 text-sm transition-colors text-center"
+          >
+            Upgrade — $39
+          </a>
         </div>
       )}
 
