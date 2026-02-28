@@ -171,6 +171,7 @@ export default function ExportPage() {
       icon: "📄",
       label: "Download PDF",
       sub: "ATS-friendly professional layout",
+      badge: "ATS-friendly",
       color: "text-emerald-400 bg-emerald-400/10",
       action: () => exportPDF("classic"),
     },
@@ -179,6 +180,7 @@ export default function ExportPage() {
       icon: "📝",
       label: "Download Word (.docx)",
       sub: "Edit in Word or Google Docs",
+      badge: null,
       color: "text-sky-400 bg-sky-400/10",
       action: exportDOCX,
     },
@@ -273,10 +275,10 @@ export default function ExportPage() {
       ) : (
         <div className="bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-4 mb-4">
           <p className="text-sm text-zinc-300 font-medium mb-1">
-            Free preview includes watermark.
+            Export professionally with one upgrade.
           </p>
           <p className="text-sm text-zinc-500 mb-3">
-            Upgrade once to export clean PDFs and Word files.
+            Free previews include a watermark. Upgrade once for clean PDF and Word files.
           </p>
           <a
             href={STRIPE_URL}
@@ -311,8 +313,13 @@ export default function ExportPage() {
               {exporting === a.id ? "⏳" : a.icon}
             </div>
             <div>
-              <div className="font-semibold text-sm">
+              <div className="font-semibold text-sm flex items-center gap-2">
                 {exporting === a.id ? "Generating…" : a.label}
+                {a.badge && exporting !== a.id && (
+                  <span className="text-xs bg-emerald-400/10 text-emerald-400 border border-emerald-400/20 px-1.5 py-0.5 rounded-full font-medium leading-none">
+                    {a.badge}
+                  </span>
+                )}
               </div>
               <div className="text-xs text-zinc-500 mt-0.5">{a.sub}</div>
             </div>

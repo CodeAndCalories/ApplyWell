@@ -10,6 +10,7 @@ export default function LandingPage() {
   const { loadDemo } = useApp();
   const router = useRouter();
   const [upgraded, setUpgraded] = useState(false);
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -173,8 +174,52 @@ export default function LandingPage() {
             Get Resume Builder — $39
           </a>
           <p className="text-center text-xs text-zinc-600 mt-2">
-            No account required. Works in your browser.
+            One-time upgrade. No subscription. No account needed.
           </p>
+        </div>
+
+        {/* ── Testimonial ───────────────────────────────────────────────────── */}
+        <div className="bg-zinc-900 border border-zinc-800 rounded-2xl px-5 py-4 mb-4">
+          <p className="text-sm text-zinc-300 leading-relaxed mb-2">
+            &ldquo;Helped my son organize everything in under an hour.&rdquo;
+          </p>
+          <p className="text-xs text-zinc-500">— Parent</p>
+        </div>
+
+        {/* ── FAQ accordion ─────────────────────────────────────────────────── */}
+        <div className="mb-4 flex flex-col gap-2">
+          {([
+            {
+              q: "Is this a subscription?",
+              a: "No. One-time upgrade. No recurring fees.",
+            },
+            {
+              q: "Is my data stored online?",
+              a: "No. Your data stays in your browser (localStorage). You can also download a backup JSON at any time.",
+            },
+            {
+              q: "What do I get with the upgrade?",
+              a: "Clean, professional PDF and Word exports with no watermark.",
+            },
+          ] as { q: string; a: string }[]).map((item, i) => (
+            <div key={i} className="bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden">
+              <button
+                onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                className="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-zinc-300 hover:text-zinc-100 transition-colors"
+                aria-expanded={openFaq === i}
+              >
+                <span>{item.q}</span>
+                <span className="text-zinc-600 flex-shrink-0 ml-2 text-xs">
+                  {openFaq === i ? "▲" : "▼"}
+                </span>
+              </button>
+              {openFaq === i && (
+                <div className="px-4 pb-3 text-sm text-zinc-500 leading-relaxed border-t border-zinc-800 pt-2">
+                  {item.a}
+                </div>
+              )}
+            </div>
+          ))}
         </div>
 
         {/* Demo option */}
