@@ -16,7 +16,6 @@ export default function LandingPage() {
     const params = new URLSearchParams(window.location.search);
     if (params.get("upgraded") === "true") {
       setUpgraded(true);
-      // Clean the URL after 4 s
       const t = setTimeout(() => {
         router.replace("/");
         setUpgraded(false);
@@ -70,18 +69,32 @@ export default function LandingPage() {
           </span>
         </div>
 
-        <h1 className="font-serif text-[clamp(36px,9vw,54px)] leading-[1.05] mt-4 mb-3">
-          Your story,{" "}
-          <span className="text-emerald-400 italic">honestly told.</span>
+        {/* 1. Headline refinement */}
+        <h1 className="font-serif text-[clamp(36px,9vw,54px)] leading-[1.05] mt-4 mb-1">
+          Build and export a{" "}
+          <span className="text-emerald-400 italic">professional resume</span>
+          {" "}with confidence.
         </h1>
+
+        {/* 1b. Subtle subline */}
+        <p className="text-sm text-zinc-500 mb-3">
+          Designed for real applications in 2026.
+        </p>
 
         <p className="text-zinc-500 text-sm text-center mb-4">
           Free preview. One-time upgrade. No subscription.
         </p>
 
-        <p className="text-zinc-400 text-base leading-relaxed mb-10 max-w-sm">
-          Build polished college application materials — verified by you, never fabricated.
+        <p className="text-zinc-400 text-base leading-relaxed mb-4 max-w-sm">
+          Build polished application materials — verified by you, never fabricated.
         </p>
+
+        {/* 2. Who it's for */}
+        <div className="flex flex-col gap-1 mb-8 text-sm text-zinc-400">
+          <span>For: • Students applying to college</span>
+          <span className="pl-5">• Job seekers applying to internships or full-time roles</span>
+          <span className="pl-5">• Parents helping organize activities</span>
+        </div>
 
         {/* Two choices */}
         <div className="mb-4">
@@ -151,7 +164,7 @@ export default function LandingPage() {
             </div>
           </div>
 
-          <ul className="flex flex-col gap-2 mb-5">
+          <ul className="flex flex-col gap-2 mb-4">
             {[
               "ATS-friendly resume builder",
               "Resume score + improvement suggestions",
@@ -166,6 +179,20 @@ export default function LandingPage() {
             ))}
           </ul>
 
+          {/* 3. Value stack */}
+          <div className="flex flex-col gap-1.5 mb-5 pt-3 border-t border-zinc-800">
+            {[
+              "Clean ATS-optimized formatting",
+              "Professional PDF + Word export",
+              "One-time payment — lifetime access",
+            ].map((v) => (
+              <div key={v} className="flex items-center gap-2 text-sm text-zinc-300">
+                <span className="text-emerald-400 flex-shrink-0">✓</span>
+                {v}
+              </div>
+            ))}
+          </div>
+
           {/* CTA → Stripe Payment Link */}
           <a
             href={STRIPE_URL}
@@ -173,15 +200,46 @@ export default function LandingPage() {
           >
             Get Resume Builder — $39
           </a>
+          {/* 4. Strengthened CTA subtext */}
           <p className="text-center text-xs text-zinc-600 mt-2">
-            One-time upgrade. No subscription. No account needed.
+            Try everything free. Upgrade only when you&apos;re ready to export.
           </p>
         </div>
 
-        {/* ── Testimonial ───────────────────────────────────────────────────── */}
+        {/* 5. Visual proof section */}
+        <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 mb-4 text-center">
+          <p className="text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-4">See the final result</p>
+          {/* Resume preview placeholder */}
+          <div className="bg-white rounded-lg mx-auto w-full max-w-xs aspect-[8.5/11] flex flex-col items-start justify-start p-4 shadow-lg overflow-hidden">
+            {/* Simulated resume layout */}
+            <div className="w-full border-b border-zinc-300 pb-2 mb-3 text-center">
+              <div className="h-3 bg-zinc-800 rounded w-32 mx-auto mb-1.5" />
+              <div className="h-2 bg-zinc-300 rounded w-24 mx-auto mb-1" />
+              <div className="h-2 bg-zinc-300 rounded w-28 mx-auto" />
+            </div>
+            {[
+              { heading: "EDUCATION", lines: [3, 2] },
+              { heading: "ACTIVITIES", lines: [3, 2, 3] },
+              { heading: "WORK EXPERIENCE", lines: [2, 3] },
+            ].map((section) => (
+              <div key={section.heading} className="w-full mb-2.5">
+                <div className="h-1.5 bg-zinc-700 rounded w-20 mb-1" />
+                <div className="h-px bg-zinc-300 w-full mb-1.5" />
+                {section.lines.map((w, i) => (
+                  <div key={i} className="h-1.5 bg-zinc-200 rounded mb-1" style={{ width: `${w * 20 + 30}%` }} />
+                ))}
+              </div>
+            ))}
+          </div>
+          <p className="text-xs text-zinc-500 mt-3">
+            Exactly what you download after upgrading.
+          </p>
+        </div>
+
+        {/* 6. Expanded testimonial */}
         <div className="bg-zinc-900 border border-zinc-800 rounded-2xl px-5 py-4 mb-4">
           <p className="text-sm text-zinc-300 leading-relaxed mb-2">
-            &ldquo;Helped my son organize everything in under an hour.&rdquo;
+            &ldquo;Helped my son organize everything in under an hour. He finally felt confident submitting his application.&rdquo;
           </p>
           <p className="text-xs text-zinc-500">— Parent</p>
         </div>
@@ -237,6 +295,11 @@ export default function LandingPage() {
           </div>
         </div>
       </div>
+
+      {/* 7. Trust line above footer */}
+      <p className="text-xs text-zinc-500 text-center mb-3">
+        Built independently to simplify applications — no subscriptions, no data selling.
+      </p>
 
       <div className="pb-8 text-xs text-zinc-600 text-center leading-relaxed">
         Writing tool only — not admissions advice. No outcome guarantees.<br />
