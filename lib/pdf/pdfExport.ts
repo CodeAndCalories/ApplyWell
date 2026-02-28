@@ -170,8 +170,10 @@ export async function exportResumePDF(
         y += lines.length * 13;
       }
 
-      y += 4;
+      y += 6;
     }
+
+    y += 2; // consistent gap after each section
   }
 
   doc.save(filename);

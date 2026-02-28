@@ -5,33 +5,54 @@ import { useApp } from "@/lib/context";
 import { Disclaimer } from "@/components/ui";
 import { scoreResume } from "@/lib/score";
 
+// ── Export success toast ──────────────────────────────────────────────────────
+function Toast({ message, onDone }: { message: string; onDone: () => void }) {
+  return (
+    <div
+      className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-zinc-900 border border-zinc-700 rounded-full px-5 py-2.5 text-sm text-zinc-200 font-medium shadow-xl animate-fade-in flex items-center gap-2"
+      onAnimationEnd={() => setTimeout(onDone, 2200)}
+    >
+      <span className="text-emerald-400">✓</span> {message}
+    </div>
+  );
+}
+
 export default function ExportPage() {
   const { state, updateProfile, saveEntry } = useApp();
   const { profile, entries } = state;
+
   const [copied, setCopied] = useState(false);
   const [exporting, setExporting] = useState<string | null>(null);
+  const [toast, setToast] = useState<string | null>(null);
   const [importMsg, setImportMsg] = useState<string | null>(null);
+  const [showSuggestions, setShowSuggestions] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // ── Score ────────────────────────────────────────────────────────────────────
-  const { score, grade, checks } = scoreResume(state);
+  const { score, grade, checks, suggestions } = scoreResume(state);
+
   const gradeColor =
     grade === "A" ? "text-emerald-400" :
     grade === "B" ? "text-sky-400" :
     grade === "C" ? "text-amber-400" :
     "text-red-400";
+
   const barColor =
     grade === "A" ? "bg-emerald-500" :
     grade === "B" ? "bg-sky-500" :
     grade === "C" ? "bg-amber-500" :
     "bg-red-500";
 
-  // ── PDF export ───────────────────────────────────────────────────────────────
+  const showToast = (msg: string) => {
+    setToast(msg);
+  };
+
+  // ── PDF ───────────────────────────────────────────────────────────────────
   const exportPDF = async (template: "classic" | "modern") => {
     setExporting(template);
     try {
       const { exportResumePDF } = await import("@/lib/pdf/pdfExport");
       await exportResumePDF(state, template, `applywell-resume-${template}.pdf`);
+      showToast(`PDF (${template}) downloaded`);
     } catch (e) {
       console.error(e);
       alert("PDF export failed. Please try again.");
@@ -40,12 +61,13 @@ export default function ExportPage() {
     }
   };
 
-  // ── DOCX export ──────────────────────────────────────────────────────────────
+  // ── DOCX ──────────────────────────────────────────────────────────────────
   const exportDOCX = async () => {
     setExporting("docx");
     try {
       const { exportResumeDOCX } = await import("@/lib/docx/docxExport");
       await exportResumeDOCX(state, "applywell-resume.docx");
+      showToast("Word document downloaded");
     } catch (e) {
       console.error(e);
       alert("DOCX export failed. Please try again.");
@@ -54,7 +76,7 @@ export default function ExportPage() {
     }
   };
 
-  // ── Plain text copy ──────────────────────────────────────────────────────────
+  // ── Plain text ────────────────────────────────────────────────────────────
   const copyText = async () => {
     const text = [
       profile.name?.toUpperCase() || "STUDENT NAME",
@@ -75,10 +97,11 @@ export default function ExportPage() {
       .join("\n\n");
     await navigator.clipboard.writeText(text);
     setCopied(true);
+    showToast("Copied to clipboard");
     setTimeout(() => setCopied(false), 2500);
   };
 
-  // ── JSON backup ──────────────────────────────────────────────────────────────
+  // ── JSON backup ───────────────────────────────────────────────────────────
   const downloadBackup = () => {
     const json = JSON.stringify(state, null, 2);
     const blob = new Blob([json], { type: "application/json" });
@@ -88,9 +111,10 @@ export default function ExportPage() {
     a.download = `applywell-backup-${new Date().toISOString().slice(0, 10)}.json`;
     a.click();
     URL.revokeObjectURL(url);
+    showToast("Backup downloaded");
   };
 
-  // ── JSON import ──────────────────────────────────────────────────────────────
+  // ── JSON import ───────────────────────────────────────────────────────────
   const handleImport = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -102,7 +126,6 @@ export default function ExportPage() {
           throw new Error("Invalid format");
         }
         updateProfile(parsed.profile);
-        // Replace all entries
         parsed.entries.forEach((entry: Parameters<typeof saveEntry>[0]) => saveEntry(entry));
         setImportMsg(`✓ Imported ${parsed.entries.length} entries successfully.`);
         setTimeout(() => setImportMsg(null), 4000);
@@ -112,7 +135,6 @@ export default function ExportPage() {
       }
     };
     reader.readAsText(file);
-    // Reset so same file can be re-imported
     e.target.value = "";
   };
 
@@ -153,31 +175,38 @@ export default function ExportPage() {
 
   return (
     <div className="py-8 animate-fade-in">
+      {toast && <Toast message={toast} onDone={() => setToast(null)} />}
+
       <h1 className="font-serif text-2xl mb-2">Export</h1>
       <p className="text-zinc-500 text-sm mb-6">
         Download your resume or back up your data.
       </p>
 
-      {/* ── Completeness Score ──────────────────────────────────────────────── */}
+      {/* ── Score card ─────────────────────────────────────────────────────── */}
       <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-5 mb-6">
         <div className="flex items-center justify-between mb-3">
           <div className="font-semibold text-sm">Resume Completeness</div>
           <div className={`text-2xl font-bold font-serif ${gradeColor}`}>
-            {grade} <span className="text-base text-zinc-400 font-sans font-normal">({score}%)</span>
+            {grade}
+            <span className="text-base text-zinc-400 font-sans font-normal ml-1.5">
+              {score}%
+            </span>
           </div>
         </div>
+
         {/* Progress bar */}
-        <div className="h-2 bg-zinc-800 rounded-full mb-4 overflow-hidden">
+        <div className="h-1.5 bg-zinc-800 rounded-full mb-4 overflow-hidden">
           <div
-            className={`h-full rounded-full transition-all duration-500 ${barColor}`}
+            className={`h-full rounded-full transition-all duration-700 ${barColor}`}
             style={{ width: `${score}%` }}
           />
         </div>
-        {/* Check list */}
-        <div className="flex flex-col gap-1.5">
+
+        {/* Checks */}
+        <div className="flex flex-col gap-1.5 mb-3">
           {checks.map((c) => (
             <div key={c.label} className="flex items-start gap-2 text-xs">
-              <span className={c.passed ? "text-emerald-400" : "text-zinc-600"}>
+              <span className={`flex-shrink-0 ${c.passed ? "text-emerald-400" : "text-zinc-600"}`}>
                 {c.passed ? "✓" : "○"}
               </span>
               <span className={c.passed ? "text-zinc-300" : "text-zinc-500"}>
@@ -186,6 +215,37 @@ export default function ExportPage() {
             </div>
           ))}
         </div>
+
+        {/* Suggestions toggle */}
+        {suggestions.length > 0 && (
+          <div>
+            <button
+              onClick={() => setShowSuggestions((s) => !s)}
+              className="text-xs text-zinc-500 hover:text-zinc-300 transition-colors flex items-center gap-1"
+            >
+              <span>{showSuggestions ? "▾" : "▸"}</span>
+              {suggestions.length} writing suggestion{suggestions.length > 1 ? "s" : ""}
+            </button>
+
+            {showSuggestions && (
+              <div className="mt-3 flex flex-col gap-2">
+                {suggestions.map((s, i) => (
+                  <div
+                    key={i}
+                    className={`text-xs rounded-lg px-3 py-2.5 leading-relaxed ${
+                      s.severity === "warn"
+                        ? "bg-amber-500/10 border border-amber-500/20 text-amber-300"
+                        : "bg-zinc-800 border border-zinc-700 text-zinc-400"
+                    }`}
+                  >
+                    {s.severity === "warn" ? "⚠ " : "💡 "}
+                    {s.message}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
       {/* ── Resume download actions ─────────────────────────────────────────── */}
@@ -223,7 +283,7 @@ export default function ExportPage() {
         <div className="font-semibold text-sm mb-1">💾 Backup & Restore</div>
         <p className="text-xs text-zinc-500 mb-4">
           Save all your data as a JSON file, or restore from a previous backup.
-          Importing will merge entries on top of your current data.
+          Importing merges entries on top of your current data.
         </p>
         <div className="flex flex-col gap-2">
           <button
