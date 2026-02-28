@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState } from "react";
@@ -13,16 +12,13 @@ function formatDate(d: string) {
   return `${months[parseInt(m) - 1]} ${y}`;
 }
 
-type Mode = "resume" | "college";
 type Template = "classic" | "modern";
 
 export default function ResumePage() {
   const { state } = useApp();
   const { profile, entries } = state;
   const [template, setTemplate] = useState<Template>("classic");
-  const [mode, setMode] = useState<Mode>("resume");
   const [visible, setVisible] = useState<Set<string>>(new Set(entries.map(e => e.id)));
-  const [exporting, setExporting] = useState(false);
   const [showWatermarkInfo, setShowWatermarkInfo] = useState(false);
 
   const isPro = false; // flip to true when Clerk + payments added
@@ -32,47 +28,14 @@ export default function ResumePage() {
 
   const visibleEntries = entries.filter(e => visible.has(e.id));
 
-  // College app mode filters differently - highlights activities over academics
-  const collegeActivityTypes = ["Activity","Sport","Volunteer","Work","Project"];
-  const collegeAcademicTypes = ["Education","Coursework","Award","Certification"];
-
   const grouped = ENTRY_TYPES.reduce<Record<string, typeof entries>>((acc, t) => {
     const items = visibleEntries.filter(e => e.type === t);
     if (items.length) acc[t] = items;
     return acc;
   }, {});
 
-  const handleExport = async () => {
-    setExporting(true);
-    try {
-      const { exportResumePDF } = await import("@/lib/pdf/pdfExport");
-      await exportResumePDF(state, template, `applywell-${mode}-${template}.pdf`);
-    } catch (e) {
-      console.error(e);
-      alert("PDF export failed. Please try again.");
-    } finally { setExporting(false); }
-  };
-
   return (
     <div className="py-6 animate-fade-in">
-      {/* Mode switcher */}
-      <div className="flex gap-2 mb-5 p-1 bg-zinc-900 rounded-xl border border-zinc-800">
-        {([["resume","📄 Resume","Standard resume format"],["college","🎓 College App","Common App style"]] as const).map(([m, label, sub]) => (
-          <button key={m} onClick={() => setMode(m as Mode)}
-            className={`flex-1 py-2.5 px-3 rounded-lg text-sm font-semibold transition-all ${
-              mode === m ? "bg-emerald-400 text-zinc-900" : "text-zinc-500 hover:text-zinc-300"}`}>
-            <div>{label}</div>
-            <div className={`text-xs font-normal mt-0.5 ${mode === m ? "text-zinc-800" : "text-zinc-600"}`}>{sub}</div>
-          </button>
-        ))}
-      </div>
-
-      {mode === "college" && (
-        <div className="bg-blue-500/10 border border-blue-500/30 rounded-xl p-3 mb-4 text-blue-300 text-xs leading-relaxed">
-          🎓 <strong>College App Mode</strong> — prioritizes activities, leadership, and impact over academics. Formatted for Common App supplemental materials.
-        </div>
-      )}
-
       {/* Template switcher */}
       <div className="flex gap-2 mb-4">
         {(["classic","modern"] as const).map(t => (
@@ -155,44 +118,14 @@ export default function ResumePage() {
               </div>
             )}
 
-            {/* College app mode: activities first */}
-            {mode === "college" ? (
-              <>
-                {collegeActivityTypes.map(type => {
-                  const items = visibleEntries.filter(e => e.type === type);
-                  if (!items.length) return null;
-                  return (
-                    <div key={type} style={{ marginBottom: 16 }}>
-                      <div style={{ fontSize: "10.5pt", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", borderBottom: "1px solid #888", paddingBottom: 3, marginBottom: 8 }}>
-                        {SECTION_LABELS[type as EntryType] || type}
-                      </div>
-                      {items.map(entry => <EntryRow key={entry.id} entry={entry} />)}
-                    </div>
-                  );
-                })}
-                {collegeAcademicTypes.map(type => {
-                  const items = visibleEntries.filter(e => e.type === type);
-                  if (!items.length) return null;
-                  return (
-                    <div key={type} style={{ marginBottom: 16 }}>
-                      <div style={{ fontSize: "10.5pt", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", borderBottom: "1px solid #888", paddingBottom: 3, marginBottom: 8 }}>
-                        {SECTION_LABELS[type as EntryType] || type}
-                      </div>
-                      {items.map(entry => <EntryRow key={entry.id} entry={entry} />)}
-                    </div>
-                  );
-                })}
-              </>
-            ) : (
-              Object.entries(grouped).map(([type, items]) => (
-                <div key={type} style={{ marginBottom: 16 }}>
-                  <div style={{ fontSize: "10.5pt", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", borderBottom: "1px solid #888", paddingBottom: 3, marginBottom: 8 }}>
-                    {SECTION_LABELS[type as EntryType] || type}
-                  </div>
-                  {items.map(entry => <EntryRow key={entry.id} entry={entry} />)}
+            {Object.entries(grouped).map(([type, items]) => (
+              <div key={type} style={{ marginBottom: 16 }}>
+                <div style={{ fontSize: "10.5pt", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", borderBottom: "1px solid #888", paddingBottom: 3, marginBottom: 8 }}>
+                  {SECTION_LABELS[type as EntryType] || type}
                 </div>
-              ))
-            )}
+                {items.map(entry => <EntryRow key={entry.id} entry={entry} />)}
+              </div>
+            ))}
 
             {visibleEntries.length === 0 && (
               <div style={{ textAlign: "center", color: "#aaa", padding: "40px 0", fontSize: "11pt" }}>
@@ -237,10 +170,10 @@ export default function ResumePage() {
           className="flex-1 bg-emerald-400 text-zinc-900 font-semibold rounded-xl py-3 text-sm text-center hover:opacity-90 transition-opacity">
           ⬇️ Download PDF
         </Link>
-        <button onClick={handleExport} disabled={exporting}
-          className="flex-1 border border-zinc-700 text-zinc-300 font-semibold rounded-xl py-3 text-sm hover:border-zinc-500 disabled:opacity-50 transition-colors">
-          {exporting ? "Generating…" : "⚡ Quick Export"}
-        </button>
+        <Link href="/export"
+          className="flex-1 border border-zinc-700 text-zinc-300 font-semibold rounded-xl py-3 text-sm text-center hover:border-emerald-400 hover:text-emerald-400 transition-colors">
+          ✨ Upgrade to export clean
+        </Link>
       </div>
 
       <p className="text-xs text-zinc-600 text-center mt-3">

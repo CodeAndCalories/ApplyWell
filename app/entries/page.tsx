@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState } from "react";
@@ -17,13 +16,17 @@ export default function EntriesPage() {
 
   return (
     <div className="py-8 animate-fade-in">
-      <div className="flex items-center justify-between mb-5">
+      <div className="flex items-center justify-between mb-1">
         <h1 className="font-serif text-2xl">Entries</h1>
         <Link href="/entries/new"
           className="bg-emerald-400 text-zinc-900 font-semibold rounded-xl px-4 py-2 text-sm">
           + Add
         </Link>
       </div>
+
+      <p className="text-xs text-zinc-500 mb-5 leading-relaxed">
+        Add everything you want included. You'll choose what to show on the resume later.
+      </p>
 
       {/* Filter chips */}
       <div className="flex gap-2 flex-wrap mb-5">
