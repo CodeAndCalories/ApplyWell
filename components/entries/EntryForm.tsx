@@ -54,9 +54,17 @@ export default function EntryForm({ initial }: Props) {
 
   return (
     <div className="py-8 animate-fade-in">
-      <button onClick={() => router.back()} className="text-zinc-500 text-sm mb-6 flex items-center gap-2 hover:text-zinc-300">
-        ← Back
-      </button>
+      <div className="flex items-center justify-between mb-6">
+        <button onClick={() => router.back()} className="text-zinc-500 text-sm flex items-center gap-2 hover:text-zinc-300">
+          ← Back
+        </button>
+        <button
+          onClick={() => router.push("/entries")}
+          className="text-xs text-zinc-500 hover:text-zinc-300 border border-zinc-800 rounded-lg px-3 py-1.5 transition-colors"
+        >
+          Done
+        </button>
+      </div>
 
       <h1 className="font-serif text-2xl mb-6">{initial ? "Edit Entry" : "New Entry"}</h1>
 

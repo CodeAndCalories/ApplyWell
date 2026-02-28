@@ -32,7 +32,7 @@ export default function VerifyPage() {
       </div>
 
       <Disclaimer>
-        By checking each item, you confirm it accurately represents your real experience. False or exaggerated information on college applications can result in rescinded admissions offers and other serious consequences.
+        Inaccurate or exaggerated information can result in serious consequences.
       </Disclaimer>
 
       {entries.length === 0 ? (

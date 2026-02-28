@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useApp } from "@/lib/context";
 
-const STRIPE_URL = "https://buy.stripe.com/6oUbIUg3odx2dMUbdN1oI09";
+const STRIPE_URL = "https://buy.stripe.com/fZubJ00TSesN095cHt7g400";
 
 export default function LandingPage() {
   const { loadDemo } = useApp();
@@ -86,7 +86,7 @@ export default function LandingPage() {
         </p>
 
         <p className="text-zinc-400 text-base leading-relaxed mb-4 max-w-sm">
-          Build polished application materials — verified by you, never fabricated.
+          Build polished resumes and application materials — verified by you, never fabricated.
         </p>
 
         {/* 2. Who it's for */}
@@ -146,7 +146,7 @@ export default function LandingPage() {
         </div>
 
         {/* ── Pricing card ──────────────────────────────────────────────────── */}
-        <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-5 mb-4">
+        <div className="bg-zinc-900 border border-emerald-500/40 rounded-2xl p-5 mb-4">
           <div className="flex items-center gap-2 mb-3">
             <span className="text-xs bg-amber-400/15 text-amber-400 border border-amber-400/20 px-2.5 py-0.5 rounded-full font-semibold">
               Early Access
@@ -202,7 +202,7 @@ export default function LandingPage() {
           </a>
           {/* 4. Strengthened CTA subtext */}
           <p className="text-center text-xs text-zinc-600 mt-2">
-            Try everything free. Upgrade only when you&apos;re ready to export.
+            Submit with confidence in minutes.
           </p>
         </div>
 

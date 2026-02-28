@@ -9,7 +9,7 @@ import { saveState, loadState } from "@/lib/storage/localStorage";
 
 import Link from "next/link";
 
-const STRIPE_URL = "https://buy.stripe.com/6oUbIUg3odx2dMUbdN1oI09";
+const STRIPE_URL = "https://buy.stripe.com/fZubJ00TSesN095cHt7g400";
 
 // ── Toast ─────────────────────────────────────────────────────────────────────
 function Toast({ message, onDone }: { message: string; onDone: () => void }) {
@@ -40,22 +40,16 @@ export default function ExportPage() {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const { score, grade, checks, suggestions } = scoreResume(state);
+  const { score, checks, suggestions } = scoreResume(state);
 
   useEffect(() => {
     setIsPro(localStorage.getItem("applywell_pro") === "true");
   }, []);
 
-  const gradeColor =
-    grade === "A" ? "text-emerald-400" :
-    grade === "B" ? "text-sky-400" :
-    grade === "C" ? "text-amber-400" :
-    "text-red-400";
-
   const barColor =
-    grade === "A" ? "bg-emerald-500" :
-    grade === "B" ? "bg-sky-500" :
-    grade === "C" ? "bg-amber-500" :
+    score >= 80 ? "bg-emerald-500" :
+    score >= 60 ? "bg-sky-500" :
+    score >= 40 ? "bg-amber-500" :
     "bg-red-500";
 
   const showToast = (msg: string) => setToast(msg);
@@ -207,11 +201,8 @@ export default function ExportPage() {
       <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-5 mb-6">
         <div className="flex items-center justify-between mb-3">
           <div className="font-semibold text-sm">Resume Completeness</div>
-          <div className={`text-2xl font-bold font-serif ${gradeColor}`}>
-            {grade}
-            <span className="text-base text-zinc-400 font-sans font-normal ml-1.5">
-              {score}%
-            </span>
+          <div className={`text-base font-semibold ${barColor.replace("bg-", "text-")}`}>
+            {score}% Complete
           </div>
         </div>
 
@@ -275,10 +266,10 @@ export default function ExportPage() {
       ) : (
         <div className="bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-4 mb-4">
           <p className="text-sm text-zinc-300 font-medium mb-1">
-            Export professionally with one upgrade.
+            Remove watermark. Unlock professional export.
           </p>
-          <p className="text-sm text-zinc-500 mb-3">
-            Free previews include a watermark. Upgrade once for clean PDF and Word files.
+          <p className="text-sm text-zinc-400 mb-3">
+            Free export includes watermark. Upgrade removes watermark and unlocks Word export.
           </p>
           <a
             href={STRIPE_URL}
