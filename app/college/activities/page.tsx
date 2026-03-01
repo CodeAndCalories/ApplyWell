@@ -58,6 +58,9 @@ export default function ActivitiesPage() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
+  const slotsUsed = ready ? data.activities.length : 0;
+  const slotsLeft = 10 - slotsUsed;
+
   return (
     <div className="py-6 animate-fade-in">
       <CollegeNav />
@@ -71,8 +74,19 @@ export default function ActivitiesPage() {
           </button>
         )}
       </div>
-      <p className="text-xs text-zinc-500 mb-5">
-        {ready ? data.activities.length : 0}/10 Common App slots used
+
+      {/* ── Counter + limits row ── */}
+      <div className="flex items-center justify-between mb-0.5">
+        <span className={`text-xs font-semibold tabular-nums ${slotsUsed >= 10 ? "text-amber-400" : "text-zinc-500"}`}>
+          {slotsUsed} / 10 activities used
+          {slotsLeft > 0 && slotsLeft <= 3 ? ` · ${slotsLeft} slot${slotsLeft > 1 ? "s" : ""} left` : ""}
+          {slotsUsed >= 10 ? " · Full" : ""}
+        </span>
+        <span className="text-xs text-zinc-600">Each description: 150 characters max</span>
+      </div>
+      {/* ── Tip line ── */}
+      <p className="text-xs text-zinc-600 mb-5">
+        Lead with your role, impact, and measurable results.
       </p>
 
       {/* ── Form ── */}
@@ -177,6 +191,7 @@ export default function ActivitiesPage() {
           <div className="text-5xl mb-3">🎯</div>
           <div className="font-semibold mb-1">No activities yet</div>
           <p className="text-zinc-500 text-sm">Add clubs, sports, volunteer work, jobs, research, and more.</p>
+          <p className="text-xs text-zinc-600 mt-2">You can list up to 10 on the Common App.</p>
         </div>
       ) : (
         <>

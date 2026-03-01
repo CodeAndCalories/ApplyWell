@@ -269,7 +269,8 @@ export default function ExportPage() {
             Remove watermark. Unlock professional export.
           </p>
           <p className="text-sm text-zinc-400 mb-3">
-            Free export includes watermark. Upgrade removes watermark and unlocks Word export.
+            Free export includes a <span className="text-zinc-300 font-medium">PREVIEW ONLY</span> watermark on every page.
+            Upgrading removes it permanently from both PDF and Word exports.
           </p>
           <a
             href={STRIPE_URL}
@@ -277,6 +278,9 @@ export default function ExportPage() {
           >
             Upgrade — $39
           </a>
+          <p className="text-xs text-zinc-500 text-center mb-1">
+            Upgrade removes the <strong>PREVIEW ONLY</strong> watermark from PDF and Word exports.
+          </p>
           <p className="text-xs text-zinc-600 text-center">
             $39 one-time — lifetime access. No subscription.
           </p>

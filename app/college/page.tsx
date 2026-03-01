@@ -52,14 +52,18 @@ export default function CollegePage() {
     <div className="py-6 animate-fade-in">
       <CollegeNav />
 
-      <div className="mb-6">
+      <div className="mb-5">
         <h1 className="font-serif text-2xl mb-1">College Applications</h1>
         <p className="text-zinc-400 text-sm leading-relaxed">
           Organize your college applications clearly and confidently.
         </p>
+        {/* START HERE helper line */}
+        <p className="text-xs text-zinc-600 mt-1.5">
+          Start here → Add activities, draft essays, then run Review before submitting.
+        </p>
       </div>
 
-      <div className="flex flex-col gap-3 mb-8">
+      <div className="flex flex-col gap-3 mb-5">
         {cards.map(card => (
           <Link key={card.href} href={card.href}
             className={`block border rounded-xl p-4 transition-all ${card.ring}`}>
@@ -78,6 +82,22 @@ export default function CollegePage() {
             </div>
           </Link>
         ))}
+      </div>
+
+      {/* ── CTA buttons ── */}
+      <div className="flex flex-col gap-2 mb-6">
+        <Link href="/college/activities"
+          className="block w-full bg-blue-500 hover:bg-blue-400 text-white font-semibold rounded-xl py-3 text-sm text-center transition-colors">
+          🎯 Go to Activities →
+        </Link>
+        <Link href="/college/essays"
+          className="block w-full bg-purple-500 hover:bg-purple-400 text-white font-semibold rounded-xl py-3 text-sm text-center transition-colors">
+          ✍️ Go to Essays →
+        </Link>
+        <Link href="/college/review"
+          className="block w-full border border-emerald-500/50 hover:border-emerald-500 text-emerald-400 hover:text-emerald-300 font-semibold rounded-xl py-3 text-sm text-center transition-colors">
+          ✅ Run Review →
+        </Link>
       </div>
 
       <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-4">
