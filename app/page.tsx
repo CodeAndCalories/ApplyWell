@@ -122,8 +122,8 @@ export default function LandingPage() {
               </div>
             </button>
 
-            {/* College Application card */}
-            <button onClick={() => handleMode("college")}
+            {/* College Application card — routes directly to /college */}
+            <button onClick={() => router.push("/college")}
               className="group bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 hover:border-amber-400/50 rounded-2xl p-5 text-left transition-all relative">
               <span className="absolute top-3.5 right-3.5 text-xs bg-zinc-800 text-zinc-500 border border-zinc-700 px-2 py-0.5 rounded-full font-medium">
                 Coming soon
@@ -288,7 +288,7 @@ export default function LandingPage() {
               className="border border-zinc-700 text-zinc-400 rounded-xl py-2.5 text-xs font-medium hover:border-zinc-500 transition-colors">
               👀 Demo Resume
             </button>
-            <button onClick={() => handleMode("college", true)}
+            <button onClick={() => router.push("/college")}
               className="border border-zinc-700 text-zinc-400 rounded-xl py-2.5 text-xs font-medium hover:border-zinc-500 transition-colors">
               👀 Demo College App
             </button>
