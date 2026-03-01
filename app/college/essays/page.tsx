@@ -1,13 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { useCollegeData, Essay, wc } from "../useCollegeData";
 import CollegeNav from "../CollegeNav";
 
 const BLANK = { prompt: "", wordLimit: "", body: "" };
-
-const PS_MIN = 250;
-const PS_MAX = 650;
 
 export default function EssaysPage() {
   const { data, ready, addEssay, updateEssay, deleteEssay, toggleCheck } = useCollegeData();
@@ -22,12 +20,6 @@ export default function EssaysPage() {
   const overLimit = limit > 0 && words > limit;
   const nearLimit = limit > 0 && words >= Math.floor(limit * 0.85) && !overLimit;
   const pct = limit > 0 ? Math.min((words / limit) * 100, 100) : 0;
-
-  // PS range state when no word limit is entered
-  const noLimit = limit === 0;
-  const psInRange = noLimit && words >= PS_MIN && words <= PS_MAX;
-  const psOver = noLimit && words > PS_MAX;
-  const psPct = noLimit ? Math.min((words / PS_MAX) * 100, 100) : 0;
 
   function set(k: keyof typeof BLANK, v: string) {
     setForm(f => ({ ...f, [k]: v }));
@@ -69,6 +61,11 @@ export default function EssaysPage() {
     <div className="py-6 animate-fade-in">
       <CollegeNav />
 
+      {/* Back to overview */}
+      <Link href="/college" className="inline-flex items-center gap-1 text-xs text-zinc-600 hover:text-zinc-400 transition-colors mb-4">
+        ← Back to overview
+      </Link>
+
       <div className="flex items-center justify-between mb-1">
         <h1 className="font-serif text-2xl">Essays</h1>
         {!open && (
@@ -104,12 +101,6 @@ export default function EssaysPage() {
               <input type="number" min="0" value={form.wordLimit}
                 onChange={e => set("wordLimit", e.target.value)}
                 placeholder="e.g. 650" />
-              {/* PS range hint when no limit entered */}
-              {noLimit && (
-                <p className="text-xs text-zinc-600 mt-1">
-                  Personal statement range: {PS_MIN}–{PS_MAX} words
-                </p>
-              )}
             </div>
 
             {/* Body */}
@@ -117,22 +108,18 @@ export default function EssaysPage() {
               <div className="flex items-center justify-between mb-1">
                 <label className="text-xs text-zinc-400">Essay Draft</label>
                 <span className={`text-xs font-bold tabular-nums
-                  ${overLimit || psOver ? "text-red-400" : nearLimit || psInRange ? "text-emerald-400" : "text-zinc-500"}`}>
-                  {words}
-                  {limit > 0 ? ` / ${limit}` : noLimit && words > 0 ? ` / ${PS_MAX} PS max` : ""} words
-                  {(nearLimit || psInRange) && " ✓"}
-                  {(overLimit || psOver) && " ⚠️"}
+                  ${overLimit ? "text-red-400" : nearLimit ? "text-emerald-400" : "text-zinc-500"}`}>
+                  {words}{limit > 0 ? ` / ${limit}` : ""} words
+                  {nearLimit && " ✓"}
+                  {overLimit && " ⚠️"}
                 </span>
               </div>
               <textarea value={form.body} onChange={e => set("body", e.target.value)}
                 rows={12}
                 placeholder="Paste or write your essay here…"
-                className={
-                  overLimit || psOver ? "border-red-500/60" :
-                  nearLimit || psInRange ? "border-emerald-500/40" : ""
-                }
+                className={overLimit ? "border-red-500/60" : nearLimit ? "border-emerald-500/40" : ""}
               />
-              {/* Progress bar — word limit */}
+              {/* Progress bar */}
               {limit > 0 && (
                 <div className="mt-1.5 h-1.5 bg-zinc-800 rounded-full overflow-hidden">
                   <div style={{ width: `${pct}%` }}
@@ -140,45 +127,11 @@ export default function EssaysPage() {
                       ${overLimit ? "bg-red-500" : nearLimit ? "bg-emerald-500" : "bg-zinc-500"}`} />
                 </div>
               )}
-              {/* Progress bar — PS range (no limit set) */}
-              {noLimit && words > 0 && (
-                <div className="mt-1.5 h-1.5 bg-zinc-800 rounded-full overflow-hidden">
-                  <div style={{ width: `${psPct}%` }}
-                    className={`h-full rounded-full transition-all duration-300
-                      ${psOver ? "bg-red-500" : psInRange ? "bg-emerald-500" : "bg-zinc-500"}`} />
-                </div>
-              )}
               {overLimit && (
                 <p className="text-xs text-red-400 mt-1 font-medium">
                   ⚠️ {words - limit} word{words - limit > 1 ? "s" : ""} over the limit.
                 </p>
               )}
-              {psOver && (
-                <p className="text-xs text-amber-400 mt-1 font-medium">
-                  Over {PS_MAX} words — most personal statements cap here.
-                </p>
-              )}
-            </div>
-
-            {/* ── Polish checklist block ── */}
-            <div className="bg-zinc-800/60 border border-zinc-700/50 rounded-lg p-3">
-              <p className="text-xs font-semibold text-zinc-500 mb-2">Polish Checklist — check these before saving</p>
-              <div className="flex flex-col gap-1.5">
-                {[
-                  "Specific examples included",
-                  "Shows growth or reflection",
-                  "Clear voice throughout",
-                  "Proofread for grammar and spelling",
-                ].map(item => (
-                  <div key={item} className="flex items-center gap-2 text-xs text-zinc-500">
-                    <span className="w-3 h-3 rounded-sm border border-zinc-600 flex-shrink-0 inline-block" />
-                    {item}
-                  </div>
-                ))}
-              </div>
-              <p className="text-xs text-zinc-700 mt-2">
-                These save per-essay after you add the essay — find them under &ldquo;Show checklist&rdquo;.
-              </p>
             </div>
 
             <div className="flex gap-2 pt-1">
@@ -203,7 +156,6 @@ export default function EssaysPage() {
           <div className="text-5xl mb-3">✍️</div>
           <div className="font-semibold mb-1">No essays yet</div>
           <p className="text-zinc-500 text-sm">Add your personal statement, supplementals, and any other prompts.</p>
-          <p className="text-xs text-zinc-600 mt-2">Personal statement: {PS_MIN}–{PS_MAX} words.</p>
         </div>
       ) : (
         <div className="flex flex-col gap-4">
@@ -216,12 +168,6 @@ export default function EssaysPage() {
             const doneCount = essay.checklist.filter(c => c.done).length;
             const isExpanded = expanded === essay.id;
 
-            // PS range for essays without a word limit
-            const noLim = lim === 0;
-            const psOk = noLim && words >= PS_MIN && words <= PS_MAX;
-            const psOv = noLim && words > PS_MAX;
-            const psPctCard = noLim ? Math.min((words / PS_MAX) * 100, 100) : 0;
-
             return (
               <div key={essay.id} className="bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden animate-fade-in">
                 {/* Card header */}
@@ -231,14 +177,11 @@ export default function EssaysPage() {
                       <div className="font-semibold text-sm truncate">{essay.prompt}</div>
                       <div className="flex items-center gap-2 mt-1 flex-wrap">
                         <span className={`text-xs font-bold tabular-nums
-                          ${over || psOv ? "text-red-400" : near || psOk ? "text-emerald-400" : "text-zinc-500"}`}>
+                          ${over ? "text-red-400" : near ? "text-emerald-400" : "text-zinc-500"}`}>
                           {words}{lim > 0 ? ` / ${lim}` : ""} words
-                          {(near || psOk) && " ✓"}
-                          {(over || psOv) && " ⚠️"}
+                          {near && " ✓"}
+                          {over && " ⚠️"}
                         </span>
-                        {noLim && (
-                          <span className="text-zinc-600 text-xs">PS: {PS_MIN}–{PS_MAX}</span>
-                        )}
                         <span className="text-zinc-700 text-xs">·</span>
                         <span className="text-xs text-zinc-500">
                           Checklist {doneCount}/{essay.checklist.length}
@@ -248,12 +191,6 @@ export default function EssaysPage() {
                         <div className="mt-2 h-1 bg-zinc-800 rounded-full overflow-hidden">
                           <div style={{ width: `${pct}%` }}
                             className={`h-full rounded-full transition-all ${over ? "bg-red-500" : near ? "bg-emerald-500" : "bg-zinc-600"}`} />
-                        </div>
-                      )}
-                      {noLim && words > 0 && (
-                        <div className="mt-2 h-1 bg-zinc-800 rounded-full overflow-hidden">
-                          <div style={{ width: `${psPctCard}%` }}
-                            className={`h-full rounded-full transition-all ${psOv ? "bg-red-500" : psOk ? "bg-emerald-500" : "bg-zinc-600"}`} />
                         </div>
                       )}
                     </div>

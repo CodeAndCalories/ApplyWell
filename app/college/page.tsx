@@ -1,11 +1,17 @@
 "use client";
 
+import { useRef, useState } from "react";
 import Link from "next/link";
-import { useCollegeData, wc } from "./useCollegeData";
+import { useCollegeData, wc, CollegeData } from "./useCollegeData";
 import CollegeNav from "./CollegeNav";
+
+const COLLEGE_KEY = "applywell_college_data";
 
 export default function CollegePage() {
   const { data, ready } = useCollegeData();
+  const fileRef = useRef<HTMLInputElement>(null);
+  const [importStatus, setImportStatus] = useState<"idle" | "ok" | "error">("idle");
+  const [importMsg, setImportMsg] = useState("");
 
   const actCount = data.activities.length;
   const essayCount = data.essays.length;
@@ -48,6 +54,54 @@ export default function CollegePage() {
     },
   ];
 
+  // ── Import college backup ─────────────────────────────────────────────────
+  function handleImport(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    e.target.value = "";
+
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      try {
+        const raw = JSON.parse(ev.target?.result as string);
+        // Accept { college: {...} } (our backup format) or raw CollegeData
+        const incoming: CollegeData = raw.college ?? raw;
+        if (!Array.isArray(incoming.activities) || !Array.isArray(incoming.essays)) {
+          throw new Error("Invalid format");
+        }
+        // Merge: add new items, keep existing ones by ID
+        const existing: CollegeData = (() => {
+          try {
+            return JSON.parse(localStorage.getItem(COLLEGE_KEY) || "{}");
+          } catch {
+            return { activities: [], essays: [] };
+          }
+        })();
+        const existingActIds = new Set((existing.activities ?? []).map((a: { id: string }) => a.id));
+        const existingEssayIds = new Set((existing.essays ?? []).map((e: { id: string }) => e.id));
+        const merged: CollegeData = {
+          activities: [
+            ...(existing.activities ?? []),
+            ...incoming.activities.filter(a => !existingActIds.has(a.id)),
+          ],
+          essays: [
+            ...(existing.essays ?? []),
+            ...incoming.essays.filter(e => !existingEssayIds.has(e.id)),
+          ],
+        };
+        localStorage.setItem(COLLEGE_KEY, JSON.stringify(merged));
+        setImportStatus("ok");
+        setImportMsg("Imported successfully — reloading…");
+        setTimeout(() => window.location.reload(), 900);
+      } catch {
+        setImportStatus("error");
+        setImportMsg("Invalid file — use a .json backup exported from this app.");
+        setTimeout(() => setImportStatus("idle"), 4000);
+      }
+    };
+    reader.readAsText(file);
+  }
+
   return (
     <div className="py-6 animate-fade-in">
       <CollegeNav />
@@ -57,12 +111,12 @@ export default function CollegePage() {
         <p className="text-zinc-400 text-sm leading-relaxed">
           Organize your college applications clearly and confidently.
         </p>
-        {/* START HERE helper line */}
         <p className="text-xs text-zinc-600 mt-1.5">
           Start here → Add activities, draft essays, then run Review before submitting.
         </p>
       </div>
 
+      {/* Cards */}
       <div className="flex flex-col gap-3 mb-5">
         {cards.map(card => (
           <Link key={card.href} href={card.href}
@@ -84,7 +138,7 @@ export default function CollegePage() {
         ))}
       </div>
 
-      {/* ── CTA buttons ── */}
+      {/* CTA buttons */}
       <div className="flex flex-col gap-2 mb-6">
         <Link href="/college/activities"
           className="block w-full bg-blue-500 hover:bg-blue-400 text-white font-semibold rounded-xl py-3 text-sm text-center transition-colors">
@@ -100,7 +154,8 @@ export default function CollegePage() {
         </Link>
       </div>
 
-      <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-4">
+      {/* Common App quick facts */}
+      <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-4 mb-4">
         <p className="text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-3">
           Common App Quick Facts
         </p>
@@ -118,6 +173,35 @@ export default function CollegePage() {
             </div>
           ))}
         </div>
+      </div>
+
+      {/* Import backup */}
+      <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-4">
+        <p className="text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-1">
+          Import College Backup
+        </p>
+        <p className="text-xs text-zinc-600 mb-3">
+          Restore from a .json file exported via the Review page. New entries are merged — existing data is kept.
+        </p>
+        <button
+          onClick={() => fileRef.current?.click()}
+          className="w-full border border-zinc-700 hover:border-zinc-500 text-zinc-400 hover:text-zinc-200 rounded-xl py-2.5 text-sm font-medium transition-colors"
+        >
+          📂 Choose College Backup (.json)
+        </button>
+        <input
+          ref={fileRef}
+          type="file"
+          accept=".json,application/json"
+          className="hidden"
+          onChange={handleImport}
+        />
+        {importStatus === "ok" && (
+          <p className="text-xs text-emerald-400 mt-2 text-center">{importMsg}</p>
+        )}
+        {importStatus === "error" && (
+          <p className="text-xs text-red-400 mt-2 text-center">{importMsg}</p>
+        )}
       </div>
     </div>
   );

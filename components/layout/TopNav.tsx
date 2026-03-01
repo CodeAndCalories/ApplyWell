@@ -6,22 +6,22 @@ import { useApp } from "@/lib/context";
 import { useState } from "react";
 
 const NAV = [
-  { href: "/dashboard", label: "Home", icon: "🏠" },
-  { href: "/entries", label: "Entries", icon: "📋" },
-  { href: "/resume", label: "Resume", icon: "📄" },
+  { href: "/dashboard",  label: "Home",       icon: "🏠" },
+  { href: "/entries",    label: "Entries",    icon: "📋" },
+  { href: "/resume",     label: "Resume",     icon: "📄" },
   { href: "/activities", label: "Activities", icon: "🎯" },
-  { href: "/verify", label: "Verify", icon: "🛡️" },
+  { href: "/verify",     label: "Verify",     icon: "🛡️" },
 ];
 
 const PAGE_TITLES: Record<string, string> = {
-  "/dashboard": "Dashboard",
-  "/profile": "Profile",
-  "/entries": "Entries",
-  "/resume": "Resume",
+  "/dashboard":  "Dashboard",
+  "/profile":    "Profile",
+  "/entries":    "Entries",
+  "/resume":     "Resume",
   "/activities": "Activities",
-  "/essay": "Essay Help",
-  "/verify": "Verify",
-  "/export": "Export",
+  "/essay":      "Essay Help",
+  "/verify":     "Verify",
+  "/export":     "Export",
 };
 
 export default function TopNav() {
@@ -30,40 +30,59 @@ export default function TopNav() {
   const { state, deleteAllData } = useApp();
   const [menuOpen, setMenuOpen] = useState(false);
 
-  if (pathname === "/" || pathname.startsWith("/preview")) return null;
+  // Hide on landing page, preview pages, and all /college/* pages
+  // (College section has its own CollegeNav)
+  if (
+    pathname === "/" ||
+    pathname.startsWith("/preview") ||
+    pathname.startsWith("/college")
+  ) return null;
 
-  const isDeepPage = pathname.startsWith("/entries/") ||
-    ["essay","export","profile"].some(p => pathname === "/" + p);
+  // Deep page = show back button + centered title instead of full nav tabs.
+  // Fix: /entries itself is NOT a deep page — only sub-routes like /entries/[slug] are.
+  const isDeepPage =
+    pathname.startsWith("/entries/") ||
+    ["essay", "export", "profile"].some(p => pathname === "/" + p);
 
-  const title = PAGE_TITLES[pathname] || "ApplyWell";
+  const title = PAGE_TITLES[pathname] ?? "ApplyWell";
   const displayName = state.profile.name || "Student";
-  const avatarInitial = displayName[0]?.toUpperCase() || "A";
+  const avatarInitial = displayName[0]?.toUpperCase() ?? "A";
 
   return (
     <div className="sticky top-0 z-50 bg-zinc-950/95 backdrop-blur border-b border-zinc-800">
       <div className="max-w-xl mx-auto px-3 h-14 flex items-center gap-2">
 
-        {/* Left */}
+        {/* Left: logo or back button */}
         {isDeepPage ? (
-          <button onClick={() => router.back()}
-            className="flex items-center gap-1 text-zinc-400 hover:text-zinc-200 transition-colors text-sm font-medium flex-shrink-0">
+          <button
+            onClick={() => router.back()}
+            className="flex items-center gap-1 text-zinc-400 hover:text-zinc-200 transition-colors text-sm font-medium flex-shrink-0"
+          >
             ← Back
           </button>
         ) : (
           <Link href="/" className="flex items-center gap-2 mr-1 flex-shrink-0">
-            <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-emerald-400 to-amber-400 flex items-center justify-center text-zinc-900 font-bold text-sm">A</div>
+            <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-emerald-400 to-amber-400 flex items-center justify-center text-zinc-900 font-bold text-sm">
+              A
+            </div>
           </Link>
         )}
 
-        {/* Center nav */}
+        {/* Center: nav tabs or page title */}
         {!isDeepPage ? (
           <div className="flex-1 flex items-center justify-center gap-0.5 overflow-x-auto no-scrollbar">
             {NAV.map((item) => {
               const active = pathname === item.href;
               return (
-                <Link key={item.href} href={item.href}
+                <Link
+                  key={item.href}
+                  href={item.href}
                   className={`flex flex-col items-center px-2 py-1 rounded-lg text-xs font-medium transition-colors whitespace-nowrap flex-shrink-0
-                    ${active ? "bg-emerald-400/15 text-emerald-400" : "text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/50"}`}>
+                    ${active
+                      ? "bg-emerald-400/15 text-emerald-400"
+                      : "text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/50"
+                    }`}
+                >
                   <span className="text-base leading-tight">{item.icon}</span>
                   <span>{item.label}</span>
                 </Link>
@@ -74,10 +93,12 @@ export default function TopNav() {
           <span className="flex-1 text-sm font-semibold text-center">{title}</span>
         )}
 
-        {/* Right: menu */}
+        {/* Right: avatar + dropdown menu */}
         <div className="relative flex-shrink-0">
-          <button onClick={() => setMenuOpen(o => !o)}
-            className="w-8 h-8 rounded-full bg-zinc-800 border border-zinc-700 flex items-center justify-center text-zinc-400 hover:text-zinc-200 transition-colors text-sm font-semibold">
+          <button
+            onClick={() => setMenuOpen(o => !o)}
+            className="w-8 h-8 rounded-full bg-zinc-800 border border-zinc-700 flex items-center justify-center text-zinc-400 hover:text-zinc-200 transition-colors text-sm font-semibold"
+          >
             {avatarInitial}
           </button>
 
@@ -90,21 +111,31 @@ export default function TopNav() {
                   <div className="text-xs text-zinc-500">{state.profile.school || "No school set"}</div>
                 </div>
                 {[
-                  { href: "/profile", label: "👤 My Profile" },
-                  { href: "/essay", label: "📖 Essay Help" },
-                  { href: "/export", label: "⬇️ Export Resume" },
+                  { href: "/profile", label: "👤 My Profile"     },
+                  { href: "/essay",   label: "📖 Essay Help"     },
+                  { href: "/export",  label: "⬇️ Export Resume" },
+                  { href: "/college", label: "🎓 College App"    },
                 ].map(item => (
-                  <Link key={item.href} href={item.href}
+                  <Link
+                    key={item.href}
+                    href={item.href}
                     onClick={() => setMenuOpen(false)}
-                    className="block px-4 py-2.5 text-sm text-zinc-300 hover:bg-zinc-800 transition-colors">
+                    className="block px-4 py-2.5 text-sm text-zinc-300 hover:bg-zinc-800 transition-colors"
+                  >
                     {item.label}
                   </Link>
                 ))}
                 <div className="border-t border-zinc-800">
-                  <button onClick={() => {
-                    setMenuOpen(false);
-                    if (confirm("Clear all data and start fresh?")) { deleteAllData(); router.push("/"); }
-                  }} className="w-full text-left px-4 py-2.5 text-sm text-amber-400 hover:bg-zinc-800 transition-colors">
+                  <button
+                    onClick={() => {
+                      setMenuOpen(false);
+                      if (confirm("Clear all data and start fresh?")) {
+                        deleteAllData();
+                        router.push("/");
+                      }
+                    }}
+                    className="w-full text-left px-4 py-2.5 text-sm text-amber-400 hover:bg-zinc-800 transition-colors"
+                  >
                     🔄 Clear & Start Over
                   </button>
                 </div>
@@ -112,6 +143,7 @@ export default function TopNav() {
             </>
           )}
         </div>
+
       </div>
     </div>
   );

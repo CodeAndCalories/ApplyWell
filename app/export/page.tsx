@@ -266,10 +266,10 @@ export default function ExportPage() {
       ) : (
         <div className="bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-4 mb-4">
           <p className="text-sm text-zinc-300 font-medium mb-1">
-            Remove watermark. Unlock professional export.
+            Export clean PDF and Word with one upgrade.
           </p>
           <p className="text-sm text-zinc-400 mb-3">
-            Free export includes a <span className="text-zinc-300 font-medium">PREVIEW ONLY</span> watermark on every page.
+            Free export includes a <span className="text-zinc-300 font-medium">PREVIEW ONLY</span> watermark.
             Upgrading removes it permanently from both PDF and Word exports.
           </p>
           <a
@@ -278,11 +278,8 @@ export default function ExportPage() {
           >
             Upgrade — $39
           </a>
-          <p className="text-xs text-zinc-500 text-center mb-1">
-            Upgrade removes the <strong>PREVIEW ONLY</strong> watermark from PDF and Word exports.
-          </p>
           <p className="text-xs text-zinc-600 text-center">
-            $39 one-time — lifetime access. No subscription.
+            One-time payment. No subscription.
           </p>
         </div>
       )}

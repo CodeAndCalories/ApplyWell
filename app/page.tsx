@@ -69,14 +69,12 @@ export default function LandingPage() {
           </span>
         </div>
 
-        {/* 1. Headline refinement */}
         <h1 className="font-serif text-[clamp(36px,9vw,54px)] leading-[1.05] mt-4 mb-1">
           Build and export a{" "}
           <span className="text-emerald-400 italic">professional resume</span>
           {" "}with confidence.
         </h1>
 
-        {/* 1b. Subtle subline */}
         <p className="text-sm text-zinc-500 mb-3">
           Designed for real applications in 2026.
         </p>
@@ -89,7 +87,7 @@ export default function LandingPage() {
           Build polished resumes and application materials — verified by you, never fabricated.
         </p>
 
-        {/* 2. Who it's for */}
+        {/* Who it's for */}
         <div className="flex flex-col gap-1 mb-8 text-sm text-zinc-400">
           <span>For: • Students applying to college</span>
           <span className="pl-5">• Job seekers applying to internships or full-time roles</span>
@@ -142,7 +140,7 @@ export default function LandingPage() {
           </div>
         </div>
 
-        {/* ── Pricing card ──────────────────────────────────────────────────── */}
+        {/* ── Pricing card ── */}
         <div className="bg-zinc-900 border border-emerald-500/40 rounded-2xl p-5 mb-4">
           <div className="flex items-center gap-2 mb-3">
             <span className="text-xs bg-amber-400/15 text-amber-400 border border-amber-400/20 px-2.5 py-0.5 rounded-full font-semibold">
@@ -167,6 +165,7 @@ export default function LandingPage() {
               "Resume score + improvement suggestions",
               "PDF + DOCX export",
               "Backup + import",
+              "College Application tracker included (activities, essays, review checklist)",
               "Future AI bullet optimizer included",
             ].map((item) => (
               <li key={item} className="flex items-start gap-2 text-sm text-zinc-400">
@@ -176,7 +175,7 @@ export default function LandingPage() {
             ))}
           </ul>
 
-          {/* 3. Value stack */}
+          {/* Value stack */}
           <div className="flex flex-col gap-1.5 mb-5 pt-3 border-t border-zinc-800">
             {[
               "Clean ATS-optimized formatting",
@@ -190,25 +189,27 @@ export default function LandingPage() {
             ))}
           </div>
 
-          {/* CTA → Stripe Payment Link */}
+          {/* Security line */}
+          <p className="text-xs text-zinc-600 text-center mb-3">
+            🔒 Runs locally. Your data stays in your browser.
+          </p>
+
+          {/* CTA → Stripe */}
           <a
             href={STRIPE_URL}
             className="block w-full bg-emerald-400 hover:bg-emerald-300 text-zinc-900 font-semibold rounded-xl py-3 text-sm transition-colors text-center"
           >
             Get Resume Builder — $39
           </a>
-          {/* 4. Strengthened CTA subtext */}
           <p className="text-center text-xs text-zinc-600 mt-2">
             Submit with confidence in minutes.
           </p>
         </div>
 
-        {/* 5. Visual proof section */}
+        {/* Visual proof section */}
         <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 mb-4 text-center">
           <p className="text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-4">See the final result</p>
-          {/* Resume preview placeholder */}
           <div className="bg-white rounded-lg mx-auto w-full max-w-xs aspect-[8.5/11] flex flex-col items-start justify-start p-4 shadow-lg overflow-hidden">
-            {/* Simulated resume layout */}
             <div className="w-full border-b border-zinc-300 pb-2 mb-3 text-center">
               <div className="h-3 bg-zinc-800 rounded w-32 mx-auto mb-1.5" />
               <div className="h-2 bg-zinc-300 rounded w-24 mx-auto mb-1" />
@@ -233,7 +234,7 @@ export default function LandingPage() {
           </p>
         </div>
 
-        {/* 6. Expanded testimonial */}
+        {/* Testimonial */}
         <div className="bg-zinc-900 border border-zinc-800 rounded-2xl px-5 py-4 mb-4">
           <p className="text-sm text-zinc-300 leading-relaxed mb-2">
             &ldquo;Helped my son organize everything in under an hour. He finally felt confident submitting his application.&rdquo;
@@ -241,7 +242,7 @@ export default function LandingPage() {
           <p className="text-xs text-zinc-500">— Parent</p>
         </div>
 
-        {/* ── FAQ accordion ─────────────────────────────────────────────────── */}
+        {/* FAQ accordion */}
         <div className="mb-4 flex flex-col gap-2">
           {([
             {
@@ -293,7 +294,7 @@ export default function LandingPage() {
         </div>
       </div>
 
-      {/* 7. Trust line above footer */}
+      {/* Trust line */}
       <p className="text-xs text-zinc-500 text-center mb-3">
         Built independently to simplify applications — no subscriptions, no data selling.
       </p>
