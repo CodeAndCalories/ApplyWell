@@ -122,19 +122,16 @@ export default function LandingPage() {
               </div>
             </button>
 
-            {/* College Application card — routes directly to /college */}
+            {/* College Application card */}
             <button onClick={() => router.push("/college")}
               className="group bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 hover:border-amber-400/50 rounded-2xl p-5 text-left transition-all relative">
-              <span className="absolute top-3.5 right-3.5 text-xs bg-zinc-800 text-zinc-500 border border-zinc-700 px-2 py-0.5 rounded-full font-medium">
-                Coming soon
-              </span>
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-xl bg-amber-400/10 border border-amber-400/20 flex items-center justify-center text-2xl flex-shrink-0">🎓</div>
                 <div className="flex-1 pr-20">
                   <div className="font-semibold text-base mb-1 group-hover:text-amber-400 transition-colors">College Application</div>
-                  <div className="text-zinc-500 text-sm leading-relaxed">Common App activities, 150-char descriptions, and personal statement brainstorming.</div>
+                  <div className="text-zinc-500 text-sm leading-relaxed">Common App activities, character limits, essay tracking, and a review checklist.</div>
                   <div className="flex gap-2 mt-3 flex-wrap">
-                    {["Activities List","Essay Help","150 Char Optimizer"].map(t => (
+                    {["Activities","Essays","Review"].map(t => (
                       <span key={t} className="text-xs bg-zinc-800 text-zinc-400 px-2 py-0.5 rounded-md">{t}</span>
                     ))}
                   </div>
