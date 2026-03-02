@@ -1,8 +1,3 @@
-import { MetadataRoute } from "next";
-
-export default function robots(): MetadataRoute.Robots {
-  return {
-    rules: { userAgent: "*", allow: "/" },
-    sitemap: "https://applywell.io/sitemap.xml",
-  };
-}
+User-agent: *
+Allow: /
+Sitemap: https://applywell.io/sitemap.xml
