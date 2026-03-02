@@ -1,15 +1,12 @@
-import { MetadataRoute } from "next";
-
-export default function sitemap(): MetadataRoute.Sitemap {
-  return [
-    { url: "https://applywell.io/" },
-    { url: "https://applywell.io/entries" },
-    { url: "https://applywell.io/resume" },
-    { url: "https://applywell.io/verify" },
-    { url: "https://applywell.io/export" },
-    { url: "https://applywell.io/college" },
-    { url: "https://applywell.io/college/activities" },
-    { url: "https://applywell.io/college/essays" },
-    { url: "https://applywell.io/college/review" },
-  ];
-}
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://applywell.io/</loc></url>
+  <url><loc>https://applywell.io/entries</loc></url>
+  <url><loc>https://applywell.io/resume</loc></url>
+  <url><loc>https://applywell.io/verify</loc></url>
+  <url><loc>https://applywell.io/export</loc></url>
+  <url><loc>https://applywell.io/college</loc></url>
+  <url><loc>https://applywell.io/college/activities</loc></url>
+  <url><loc>https://applywell.io/college/essays</loc></url>
+  <url><loc>https://applywell.io/college/review</loc></url>
+</urlset>
