@@ -8,8 +8,10 @@ import { parseBackupFile, mergeAppState } from "@/lib/storage/backup";
 import { saveState, loadState } from "@/lib/storage/localStorage";
 
 import Link from "next/link";
+import type { TemplateKey } from "@/lib/pdf/pdfExport";
 
 const STRIPE_URL = "https://buy.stripe.com/fZubJ00TSesN095cHt7g400";
+const TEMPLATE_STORAGE_KEY = "applywell_resume_template";
 
 // ── Toast ─────────────────────────────────────────────────────────────────────
 function Toast({ message, onDone }: { message: string; onDone: () => void }) {
@@ -30,6 +32,7 @@ export default function ExportPage() {
   const [exporting, setExporting] = useState<string | null>(null);
   const [toast, setToast] = useState<string | null>(null);
   const [isPro, setIsPro] = useState(false);
+  const [resumeTemplate, setResumeTemplate] = useState<TemplateKey>("classic");
 
   // Import state
   const [importMode, setImportMode] = useState<"merge" | "replace">("merge");
@@ -44,6 +47,8 @@ export default function ExportPage() {
 
   useEffect(() => {
     setIsPro(localStorage.getItem("applywell_pro") === "true");
+    const stored = localStorage.getItem(TEMPLATE_STORAGE_KEY) as TemplateKey | null;
+    if (stored) setResumeTemplate(stored);
   }, []);
 
   const barColor =
@@ -55,12 +60,12 @@ export default function ExportPage() {
   const showToast = (msg: string) => setToast(msg);
 
   // ── PDF ───────────────────────────────────────────────────────────────────
-  const exportPDF = async (template: "classic" | "modern") => {
-    setExporting(template);
+  const exportPDF = async () => {
+    setExporting("pdf");
     try {
       const { exportResumePDF } = await import("@/lib/pdf/pdfExport");
-      await exportResumePDF(state, template, `applywell-resume-${template}.pdf`, isPro);
-      showToast(`PDF (${template}) downloaded`);
+      await exportResumePDF(state, resumeTemplate, `applywell-resume-${resumeTemplate}.pdf`, isPro);
+      showToast(`PDF (${resumeTemplate}) downloaded`);
     } catch (e) {
       console.error(e);
       alert("PDF export failed. Please try again.");
@@ -164,10 +169,10 @@ export default function ExportPage() {
       id: "pdf",
       icon: "📄",
       label: "Download PDF",
-      sub: "ATS-friendly professional layout",
+      sub: `Template: ${resumeTemplate.charAt(0).toUpperCase() + resumeTemplate.slice(1)} · ATS-friendly`,
       badge: "ATS-friendly",
       color: "text-emerald-400 bg-emerald-400/10",
-      action: () => exportPDF("classic"),
+      action: exportPDF,
     },
     {
       id: "docx",
