@@ -154,7 +154,7 @@ export default function LandingPage() {
               <div className="text-zinc-500 text-xs mt-0.5">One-time purchase · no subscription</div>
             </div>
             <div className="text-right">
-              <div className="font-serif text-2xl text-zinc-100">$39</div>
+              <div className="font-serif text-2xl text-zinc-100">$9</div>
               <div className="text-zinc-500 text-xs">one-time</div>
             </div>
           </div>
@@ -199,7 +199,7 @@ export default function LandingPage() {
             href={STRIPE_URL}
             className="block w-full bg-emerald-400 hover:bg-emerald-300 text-zinc-900 font-semibold rounded-xl py-3 text-sm transition-colors text-center"
           >
-            Get Resume Builder — $39
+            Get Resume Builder — $9
           </a>
           <p className="text-center text-xs text-zinc-600 mt-2">
             Submit with confidence in minutes.
