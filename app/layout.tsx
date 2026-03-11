@@ -7,20 +7,25 @@ import SavedIndicator from "@/components/layout/SavedIndicator";
 export const metadata: Metadata = {
   metadataBase: new URL("https://applywell.io"),
   title: {
-    default: "ApplyWell — Resume & College Application Builder",
+    default: "College Resume Builder & Application Tracker | ApplyWell",
     template: "%s | ApplyWell",
   },
   description:
     "ApplyWell helps students and job seekers build professional resumes and college applications. Track Common App activities, draft essays, and export clean PDFs. Free preview. One-time upgrade. No subscription.",
   keywords: [
     "resume builder",
+    "college resume builder",
+    "resume for college applications",
+    "common app activities list",
     "college application tracker",
-    "Common App activities",
+    "high school resume builder",
+    "college activities resume",
+    "applywell",
+    "college application tracker",
     "college essay tracker",
     "ATS resume",
     "student resume builder",
     "college application help",
-    "applywell",
   ],
   alternates: {
     canonical: "https://applywell.io",
