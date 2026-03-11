@@ -10,7 +10,7 @@ import { saveState, loadState } from "@/lib/storage/localStorage";
 import Link from "next/link";
 import type { TemplateKey } from "@/lib/pdf/pdfExport";
 
-const EARLY_ADOPTER_PRICE_URL = "https://buy.stripe.com/6oU7sKgSQ2K52hdcHt7g401";
+const STRIPE_URL = "https://buy.stripe.com/6oU7sKgSQ2K52hdcHt7g401";
 const TEMPLATE_STORAGE_KEY = "applywell_resume_template";
 
 // ── Toast ─────────────────────────────────────────────────────────────────────
