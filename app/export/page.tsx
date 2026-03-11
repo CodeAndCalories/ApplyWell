@@ -281,7 +281,7 @@ export default function ExportPage() {
             href={STRIPE_URL}
             className="block w-full bg-emerald-400 hover:bg-emerald-300 text-zinc-900 font-semibold rounded-xl py-2 text-sm transition-colors text-center mb-2"
           >
-            Upgrade — $39
+            Upgrade — $9
           </a>
           <p className="text-xs text-zinc-600 text-center">
             One-time payment. No subscription.
