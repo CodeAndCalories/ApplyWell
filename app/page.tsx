@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useApp } from "@/lib/context";
 
-const STRIPE_URL = "https://buy.stripe.com/fZubJ00TSesN095cHt7g400";
+const STRIPE_URL = "https://buy.stripe.com/6oU7sKgSQ2K52hdcHt7g401";
 
 export default function LandingPage() {
   const { loadDemo } = useApp();
