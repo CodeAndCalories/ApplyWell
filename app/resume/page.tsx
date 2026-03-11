@@ -441,7 +441,7 @@ export default function ResumePage() {
               onClick={() => setShowProGate(false)}
               className="block w-full bg-emerald-400 hover:bg-emerald-300 text-zinc-900 font-semibold rounded-xl py-2.5 text-sm text-center transition-colors mb-3"
             >
-              Upgrade — $39 one-time
+              Upgrade — $9 one-time
             </Link>
             <button
               onClick={() => setShowProGate(false)}
