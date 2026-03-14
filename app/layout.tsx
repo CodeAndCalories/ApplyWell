@@ -66,11 +66,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           rel="stylesheet"
         />
       </head>
-      <body className="bg-zinc-950 text-zinc-100 antialiased min-h-screen">
+      <body className="bg-zinc-950 text-zinc-100 antialiased min-h-screen" style={{ fontFamily: "var(--font-sans)" }}>
         <AppProvider>
           <SavedIndicator />
           <TopNav />
-          <main className="max-w-xl mx-auto px-4 pb-8">{children}</main>
+          <main className="max-w-xl mx-auto px-5 pb-12">{children}</main>
         </AppProvider>
       </body>
     </html>
