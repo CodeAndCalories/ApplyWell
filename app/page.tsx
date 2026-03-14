@@ -106,14 +106,14 @@ export default function LandingPage() {
           </span>
         </div>
 
-        <h1 className="font-serif text-[clamp(34px,8.5vw,52px)] leading-[1.06] mb-4 tracking-tight">
-          Build and export a{" "}
-          <em className="text-emerald-400 not-italic">professional resume</em>
-          {" "}with confidence.
+        <h1 className="font-serif text-[clamp(34px,8.5vw,52px)] leading-[1.06] mb-3 tracking-tight">
+          Build a{" "}
+          <em className="text-emerald-400 not-italic">Professional Resume</em>
+          {" "}in Minutes.
         </h1>
 
         <p className="text-zinc-400 text-base leading-relaxed mb-5 max-w-sm">
-          Build polished resumes and application materials — verified by you, never fabricated.
+          ATS-friendly resumes that recruiters actually read. One-time $9. No subscriptions.
         </p>
 
         {/* Audience list */}
@@ -255,20 +255,56 @@ export default function LandingPage() {
             ))}
           </div>
 
-          <p className="text-xs text-zinc-600 text-center mb-3">
+          {/* ── Comparison block ────────────────────────────────────────── */}
+          <div className="border border-zinc-700/60 rounded-xl overflow-hidden mb-5">
+            <div className="grid grid-cols-2">
+              <div className="px-3 py-3 border-r border-zinc-700/60">
+                <div className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-1.5">
+                  Typical builders
+                </div>
+                <div className="font-serif text-xl text-zinc-400 leading-none mb-0.5">
+                  $15–$30
+                </div>
+                <div className="text-xs text-zinc-600">per month</div>
+              </div>
+              <div className="px-3 py-3 bg-emerald-400/5">
+                <div className="text-[10px] font-bold text-emerald-500 uppercase tracking-widest mb-1.5">
+                  ApplyWell
+                </div>
+                <div className="font-serif text-xl text-emerald-400 leading-none mb-0.5">
+                  $9
+                </div>
+                <div className="text-xs text-emerald-600 font-medium">one-time, forever</div>
+              </div>
+            </div>
+          </div>
+
+          <p className="text-xs text-zinc-600 text-center mb-4">
             🔒 Runs locally. Your data stays in your browser.
           </p>
 
           <a
             href={STRIPE_URL}
-            className="block w-full bg-emerald-400 hover:bg-emerald-300 text-zinc-900 font-semibold rounded-xl py-3.5 text-sm transition-colors text-center"
+            className="block w-full bg-emerald-400 hover:bg-emerald-300 hover:-translate-y-0.5 text-zinc-900 font-semibold rounded-xl py-3.5 text-sm transition-all text-center"
             style={{ boxShadow: "0 2px 12px rgb(52 211 153 / 0.3)" }}
           >
             Get Resume Builder — $9
           </a>
-          <p className="text-center text-xs text-zinc-600 mt-2">
-            Submit with confidence in minutes.
-          </p>
+
+          {/* ── Trust signals ───────────────────────────────────────────── */}
+          <div className="grid grid-cols-2 gap-x-3 gap-y-1.5 mt-4">
+            {[
+              "One-time payment",
+              "Secure Stripe checkout",
+              "Instant download",
+              "30-day refund guarantee",
+            ].map((signal) => (
+              <div key={signal} className="flex items-center gap-1.5 text-xs text-zinc-500">
+                <span className="text-emerald-400 flex-shrink-0">✓</span>
+                {signal}
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* ── Resume preview mockup ────────────────────────────────────────── */}

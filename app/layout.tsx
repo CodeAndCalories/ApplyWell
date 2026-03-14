@@ -7,7 +7,7 @@ import SavedIndicator from "@/components/layout/SavedIndicator";
 export const metadata: Metadata = {
   metadataBase: new URL("https://applywell.io"),
   title: {
-    default: "College Resume Builder & Application Tracker | ApplyWell",
+    default: "ApplyWell",
     template: "%s | ApplyWell",
   },
   description:
@@ -27,6 +27,17 @@ export const metadata: Metadata = {
     "student resume builder",
     "college application help",
   ],
+  icons: {
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png" }],
+    other: [
+      { rel: "manifest", url: "/site.webmanifest" },
+    ],
+  },
   alternates: {
     canonical: "https://applywell.io",
   },

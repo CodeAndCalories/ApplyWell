@@ -61,22 +61,24 @@ const NAV = [
 ];
 
 const PAGE_TITLES: Record<string, string> = {
-  "/dashboard":  "Dashboard",
-  "/profile":    "Profile",
-  "/entries":    "Entries",
-  "/resume":     "Resume",
-  "/activities": "Activities",
-  "/essay":      "Essay Help",
-  "/verify":     "Verify",
-  "/export":     "Export",
+  "/dashboard":     "Dashboard",
+  "/profile":       "Profile",
+  "/entries":       "Entries",
+  "/resume":        "Resume",
+  "/activities":    "Activities",
+  "/essay":         "Essay Help",
+  "/verify":        "Verify",
+  "/export":        "Export",
+  "/cover-letter":  "Cover Letter",
 };
 
 /* ── Menu link items ──────────────────────────────────────────────────────── */
 const MENU_LINKS = [
-  { href: "/profile", label: "My Profile",     icon: "👤" },
-  { href: "/essay",   label: "Essay Help",     icon: "📖" },
-  { href: "/export",  label: "Export Resume",  icon: "⬇️" },
-  { href: "/college", label: "College App",    icon: "🎓" },
+  { href: "/profile",       label: "My Profile",     icon: "👤" },
+  { href: "/essay",         label: "Essay Help",     icon: "📖" },
+  { href: "/cover-letter",  label: "Cover Letter",   icon: "✉️" },
+  { href: "/export",        label: "Export Resume",  icon: "⬇️" },
+  { href: "/college",       label: "College App",    icon: "🎓" },
 ];
 
 /* ── Component ────────────────────────────────────────────────────────────── */
@@ -94,7 +96,7 @@ export default function TopNav() {
 
   const isDeepPage =
     pathname.startsWith("/entries/") ||
-    ["essay", "export", "profile"].some(p => pathname === "/" + p);
+    ["essay", "export", "profile", "cover-letter"].some(p => pathname === "/" + p);
 
   const title = PAGE_TITLES[pathname] ?? "ApplyWell";
   const displayName   = state.profile.name || "Student";
