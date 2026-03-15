@@ -230,6 +230,13 @@ export default function LandingPage() {
             <em className="text-emerald-400 not-italic">That Gets You In.</em>
           </h1>
 
+          {/* ATS badge */}
+          <div className="mb-5">
+            <span className="inline-flex items-center gap-1.5 bg-emerald-400/10 text-emerald-400 text-xs font-semibold px-3 py-1 rounded-full border border-emerald-400/20">
+              ✓ ATS-Optimized
+            </span>
+          </div>
+
           {/* Subheadline */}
           <p className="text-zinc-400 text-base leading-relaxed mb-7 max-w-sm">
             ApplyWell helps you write stronger essays, track deadlines, and apply with confidence —
@@ -286,6 +293,58 @@ export default function LandingPage() {
               </div>
             </div>
           </div>
+        </section>
+
+        {/* ══════════════════════════════════════════════════════════════════════
+            BEFORE / AFTER
+        ══════════════════════════════════════════════════════════════════════ */}
+        <section className="py-6 border-t border-zinc-800/50">
+          <SectionLabel>See the difference</SectionLabel>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
+
+            {/* Left — Typical (messy) */}
+            <div className="bg-zinc-900 border border-zinc-700/60 rounded-2xl p-4 shadow-card">
+              <div className="flex items-center gap-2 mb-3">
+                <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest px-2 py-0.5 rounded-full border border-zinc-700 bg-zinc-800">
+                  Typical Application
+                </span>
+              </div>
+              <div className="flex flex-col gap-1.5">
+                <p className="font-mono text-[11px] text-zinc-500 leading-snug">worked at pizza place</p>
+                <p className="font-mono text-[10px] text-zinc-600 leading-snug pl-1">summer 2023</p>
+                <p className="font-mono text-[11px] text-zinc-500 leading-snug mt-0.5">helped customers</p>
+                <p className="font-mono text-[10px] text-zinc-600 leading-snug">did some marketing stuff</p>
+              </div>
+            </div>
+
+            {/* Right — ApplyWell (clean) */}
+            <div className="bg-zinc-900 border border-emerald-500/25 rounded-2xl p-4 shadow-card" style={{ boxShadow: "0 1px 2px rgb(0 0 0 / 0.5), 0 2px 8px rgb(0 0 0 / 0.35), 0 0 0 1px rgb(52 211 153 / 0.06)" }}>
+              <div className="flex items-center gap-2 mb-3">
+                <span className="text-[10px] font-bold text-emerald-400 uppercase tracking-widest px-2 py-0.5 rounded-full border border-emerald-400/25 bg-emerald-400/10 flex items-center gap-1">
+                  <CheckIcon /> ApplyWell Application
+                </span>
+              </div>
+              <div className="flex flex-col gap-1.5">
+                <p className="text-xs font-semibold text-zinc-200 leading-snug">Food Service Associate</p>
+                <p className="text-[10px] text-emerald-500 font-medium leading-none">Summer 2023</p>
+                <div className="flex flex-col gap-1 mt-1">
+                  <div className="flex items-start gap-1.5">
+                    <span className="text-emerald-500 mt-px flex-shrink-0 text-[10px]">›</span>
+                    <p className="text-[11px] text-zinc-300 leading-snug">Managed high-volume customer orders</p>
+                  </div>
+                  <div className="flex items-start gap-1.5">
+                    <span className="text-emerald-500 mt-px flex-shrink-0 text-[10px]">›</span>
+                    <p className="text-[11px] text-zinc-300 leading-snug">Maintained 98% customer satisfaction rating</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p className="text-center text-xs text-zinc-500 italic">
+            Same experience. Completely different impression.
+          </p>
         </section>
 
         {/* ══════════════════════════════════════════════════════════════════════

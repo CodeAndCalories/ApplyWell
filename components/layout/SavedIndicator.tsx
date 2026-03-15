@@ -1,10 +1,12 @@
 "use client";
 
 import { useApp } from "@/lib/context";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function SavedIndicator() {
   const { isSaved } = useApp();
+  const pathname = usePathname();
   const [visible, setVisible] = useState(false);
 
   // Show for 2 s each time isSaved fires, then hide
@@ -15,7 +17,7 @@ export default function SavedIndicator() {
     return () => clearTimeout(t);
   }, [isSaved]);
 
-  if (!visible) return null;
+  if (!visible || pathname === "/") return null;
 
   return (
     <div
