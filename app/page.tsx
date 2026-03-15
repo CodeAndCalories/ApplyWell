@@ -242,7 +242,7 @@ export default function LandingPage() {
         {/* ══════════════════════════════════════════════════════════════════════
             HERO
         ══════════════════════════════════════════════════════════════════════ */}
-        <section className="py-8">
+        <section className="py-12">
           {/* Pill */}
           <div className="mb-5">
             <span className="inline-flex items-center gap-1.5 bg-emerald-400/10 text-emerald-400 text-xs font-bold px-3.5 py-1.5 rounded-full border border-emerald-400/20">
@@ -333,7 +333,7 @@ export default function LandingPage() {
         {/* ══════════════════════════════════════════════════════════════════════
             BEFORE / AFTER
         ══════════════════════════════════════════════════════════════════════ */}
-        <section className="py-6 border-t border-zinc-800/50">
+        <section className="py-10 border-t border-zinc-800/50">
           <SectionLabel>See the difference</SectionLabel>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
@@ -385,7 +385,7 @@ export default function LandingPage() {
         {/* ══════════════════════════════════════════════════════════════════════
             DEMO PREVIEW
         ══════════════════════════════════════════════════════════════════════ */}
-        <section className="py-6 border-t border-zinc-800/50">
+        <section className="py-10 border-t border-zinc-800/50">
           <SectionLabel>See how ApplyWell works</SectionLabel>
           <p className="text-zinc-500 text-sm leading-relaxed mb-4">
             A quick look at a partially completed application built with ApplyWell.
@@ -546,9 +546,9 @@ export default function LandingPage() {
         {/* ══════════════════════════════════════════════════════════════════════
             FEATURES
         ══════════════════════════════════════════════════════════════════════ */}
-        <section className="py-6 border-t border-zinc-800/50">
+        <section className="py-10 border-t border-zinc-800/50">
           <SectionLabel>Everything you need</SectionLabel>
-          <div className="flex flex-col gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {FEATURE_GRID.map((f) => (
               <div
                 key={f.headline}
@@ -569,7 +569,7 @@ export default function LandingPage() {
         {/* ══════════════════════════════════════════════════════════════════════
             SOCIAL PROOF
         ══════════════════════════════════════════════════════════════════════ */}
-        <section className="py-6 border-t border-zinc-800/50">
+        <section className="py-10 border-t border-zinc-800/50">
           <SectionLabel>What students &amp; parents say</SectionLabel>
           <div className="flex flex-col gap-3 mb-5">
             {TESTIMONIALS.map((t) => (
@@ -616,7 +616,7 @@ export default function LandingPage() {
         {/* ══════════════════════════════════════════════════════════════════════
             COMPARISON
         ══════════════════════════════════════════════════════════════════════ */}
-        <section className="py-6 border-t border-zinc-800/50">
+        <section className="py-10 border-t border-zinc-800/50">
           <SectionLabel>Why ApplyWell beats the alternative</SectionLabel>
           <div className="bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden shadow-card">
             {/* Column headers */}
@@ -657,7 +657,7 @@ export default function LandingPage() {
         {/* ══════════════════════════════════════════════════════════════════════
             SAMPLE PREVIEW
         ══════════════════════════════════════════════════════════════════════ */}
-        <section className="py-6 border-t border-zinc-800/50">
+        <section className="py-10 border-t border-zinc-800/50">
           <SectionLabel>See what you&apos;ll build</SectionLabel>
           <div className="bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden shadow-card">
             {/* Mock doc header */}
@@ -710,7 +710,7 @@ export default function LandingPage() {
         {/* ══════════════════════════════════════════════════════════════════════
             TRUST SIGNALS
         ══════════════════════════════════════════════════════════════════════ */}
-        <section className="py-6 border-t border-zinc-800/50">
+        <section className="py-10 border-t border-zinc-800/50">
           <SectionLabel>You&apos;re in good hands</SectionLabel>
           <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-5 shadow-card flex flex-col gap-2.5">
             {TRUST.map((t) => (
@@ -727,11 +727,11 @@ export default function LandingPage() {
         {/* ══════════════════════════════════════════════════════════════════════
             PRICING CARD
         ══════════════════════════════════════════════════════════════════════ */}
-        <section className="py-6 border-t border-zinc-800/50">
+        <section className="py-10 border-t border-zinc-800/50">
           <SectionLabel>Simple pricing</SectionLabel>
           <div
-            className="bg-zinc-900 border border-emerald-500/30 rounded-2xl p-5 relative overflow-hidden"
-            style={{ boxShadow: "0 4px 24px rgb(0 0 0 / 0.5), 0 0 0 1px rgb(52 211 153 / 0.08)" }}
+            className="bg-zinc-900 border border-emerald-400/40 rounded-2xl p-5 relative overflow-hidden"
+            style={{ boxShadow: "0 4px 24px rgb(0 0 0 / 0.5), 0 0 0 1px rgb(52 211 153 / 0.15), 0 8px 40px rgb(52 211 153 / 0.12)" }}
           >
             <div className="absolute top-0 right-0 w-48 h-48 bg-emerald-400/5 rounded-full blur-3xl pointer-events-none -translate-y-1/2 translate-x-1/3" />
 
@@ -778,7 +778,7 @@ export default function LandingPage() {
         {/* ══════════════════════════════════════════════════════════════════════
             FAQ
         ══════════════════════════════════════════════════════════════════════ */}
-        <section className="py-6 border-t border-zinc-800/50">
+        <section className="py-10 border-t border-zinc-800/50">
           <SectionLabel>Frequently asked questions</SectionLabel>
           <div className="flex flex-col gap-2">
             {FAQS.map((item, i) => (
@@ -813,7 +813,7 @@ export default function LandingPage() {
         {/* ══════════════════════════════════════════════════════════════════════
             FINAL CTA
         ══════════════════════════════════════════════════════════════════════ */}
-        <section className="py-8 border-t border-zinc-800/50">
+        <section className="py-12 border-t border-zinc-800/50">
           <div className="text-center mb-6">
             <h2 className="font-serif text-2xl mb-2 tracking-tight">
               Ready to apply with confidence?
