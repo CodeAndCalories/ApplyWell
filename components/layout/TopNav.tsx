@@ -79,6 +79,7 @@ const MENU_LINKS = [
   { href: "/cover-letter",  label: "Cover Letter",   icon: "✉️" },
   { href: "/export",        label: "Export Resume",  icon: "⬇️" },
   { href: "/college",       label: "College App",    icon: "🎓" },
+  { href: "/guides",        label: "Guides",         icon: "📚" },
 ];
 
 /* ── Component ────────────────────────────────────────────────────────────── */

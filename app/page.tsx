@@ -212,12 +212,17 @@ export default function LandingPage() {
           </div>
           <span className="font-serif text-lg tracking-tight">ApplyWell</span>
         </div>
-        <button
-          onClick={() => router.push("/dashboard")}
-          className="text-xs text-zinc-400 hover:text-zinc-200 border border-zinc-700/80 hover:border-zinc-600 rounded-xl px-3.5 py-1.5 transition-all shadow-card"
-        >
-          Open App →
-        </button>
+        <div className="flex items-center gap-3">
+          <a href="/guides" className="text-xs text-zinc-500 hover:text-zinc-300 transition-colors">
+            Guides
+          </a>
+          <button
+            onClick={() => router.push("/dashboard")}
+            className="text-xs text-zinc-400 hover:text-zinc-200 border border-zinc-700/80 hover:border-zinc-600 rounded-xl px-3.5 py-1.5 transition-all shadow-card"
+          >
+            Open App →
+          </button>
+        </div>
       </div>
 
       {/* ── Upgrade success ─────────────────────────────────────────────────── */}
@@ -866,6 +871,7 @@ export default function LandingPage() {
             { label: "Terms",    href: "/terms" },
             { label: "Contact",  href: "/contact" },
             { label: "Refund",   href: "/refund" },
+            { label: "Guides",   href: "/guides" },
           ].map((l) => (
             <a key={l.href} href={l.href} className="text-xs text-zinc-700 hover:text-zinc-500 transition-colors">
               {l.label}
