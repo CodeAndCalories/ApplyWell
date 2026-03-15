@@ -17,19 +17,20 @@ const PRICING_FEATURES = [
 ];
 
 // ── Marketing feature grid ────────────────────────────────────────────────────
+// Icon components are defined below the StarIcon block — used here by reference.
 const FEATURE_GRID = [
   {
-    icon: "✍️",
+    iconKey: "pencil",
     headline: "Stop Stressing About Essays",
     body: "Guided prompts help you write compelling personal statements in half the time.",
   },
   {
-    icon: "📅",
+    iconKey: "calendar",
     headline: "Never Miss a Deadline",
     body: "Track every school, requirement, and due date in one clean dashboard.",
   },
   {
-    icon: "⭐",
+    iconKey: "shield",
     headline: "Look More Prepared Than 90% of Applicants",
     body: "Generate polished resumes and cover letters ready to attach to any application.",
   },
@@ -128,6 +129,32 @@ function StarIcon() {
     </svg>
   );
 }
+function IconPencil() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+      <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+    </svg>
+  );
+}
+function IconCalendar() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+      <line x1="16" y1="2" x2="16" y2="6" />
+      <line x1="8" y1="2" x2="8" y2="6" />
+      <line x1="3" y1="10" x2="21" y2="10" />
+    </svg>
+  );
+}
+function IconShield() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+      <polyline points="9 12 11 14 15 10" />
+    </svg>
+  );
+}
 
 // ── Primary CTA button (min 48px, full-width) ─────────────────────────────────
 function PrimaryButton({
@@ -175,7 +202,7 @@ export default function LandingPage() {
     <div className="min-h-screen flex flex-col max-w-xl mx-auto px-5">
 
       {/* ── Header ──────────────────────────────────────────────────────────── */}
-      <div className="flex items-center justify-between pt-8 pb-6">
+      <div className="sticky top-0 z-50 backdrop-blur-md bg-zinc-950/90 border-b border-zinc-800/60 -mx-5 px-5 py-3 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div
             className="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-400 to-amber-400 flex items-center justify-center text-zinc-900 font-bold text-base"
@@ -225,7 +252,7 @@ export default function LandingPage() {
           </div>
 
           {/* Headline */}
-          <h1 className="font-serif text-[clamp(32px,8vw,50px)] leading-[1.06] mb-4 tracking-tight">
+          <h1 className="font-serif text-[clamp(40px,9vw,60px)] leading-[1.06] mb-4 tracking-tight">
             Build a College Application{" "}
             <em className="text-emerald-400 not-italic">That Gets You In.</em>
           </h1>
@@ -270,16 +297,24 @@ export default function LandingPage() {
                 <span className="text-[10px] font-bold text-emerald-400 uppercase tracking-widest bg-emerald-400/10 border border-emerald-400/20 px-2 py-0.5 rounded-md">Draft 1</span>
                 <span className="text-[10px] text-zinc-600">Personal Statement · 650 words max</span>
               </div>
-              {/* Fake essay lines */}
-              <div className="space-y-2.5">
-                <div className="h-2 bg-zinc-700 rounded w-full" />
-                <div className="h-2 bg-zinc-700 rounded w-11/12" />
-                <div className="h-2 bg-zinc-700 rounded w-10/12" />
-                <div className="h-2 bg-zinc-800 rounded w-0 my-1" /> {/* gap */}
-                <div className="h-2 bg-zinc-700 rounded w-full" />
-                <div className="h-2 bg-zinc-700 rounded w-9/12" />
-                <div className="h-2 bg-zinc-700 rounded w-11/12" />
-                <div className="h-2 bg-zinc-700 rounded w-8/12" />
+              {/* Essay content */}
+              <p className="text-xs text-zinc-300 leading-relaxed mb-3">
+                Growing up in a small town, I learned early that responsibility often arrives before opportunity. Balancing school, sports, and helping my family&apos;s business taught me how to manage pressure and stay focused on long-term goals.
+              </p>
+              <p className="text-xs text-zinc-500 leading-relaxed mb-4">
+                These experiences shaped my approach to problem-solving and gave me the resilience to tackle challenges head-on — a quality I plan to bring to every project in college and beyond.
+              </p>
+              {/* Activities snippet */}
+              <div className="border-t border-zinc-800 pt-3">
+                <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-2">Activities</p>
+                <div className="flex flex-col gap-1">
+                  {["Robotics Club — Captain", "Track Team — 2 years", "Volunteer Tutor — 80+ hours"].map((a) => (
+                    <div key={a} className="flex items-center gap-1.5">
+                      <span className="w-1 h-1 rounded-full bg-emerald-400/60 flex-shrink-0" />
+                      <span className="text-[11px] text-zinc-400">{a}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
               {/* Mock strength bar */}
               <div className="mt-5 pt-4 border-t border-zinc-800">
@@ -519,7 +554,11 @@ export default function LandingPage() {
                 key={f.headline}
                 className="bg-zinc-900 border border-zinc-800 rounded-2xl p-5 shadow-card"
               >
-                <div className="text-3xl mb-3 leading-none">{f.icon}</div>
+                <div className="mb-3 text-emerald-400">
+                  {f.iconKey === "pencil"   && <IconPencil />}
+                  {f.iconKey === "calendar" && <IconCalendar />}
+                  {f.iconKey === "shield"   && <IconShield />}
+                </div>
                 <div className="font-semibold text-zinc-100 text-base mb-1.5 leading-snug">{f.headline}</div>
                 <div className="text-zinc-500 text-sm leading-relaxed">{f.body}</div>
               </div>
