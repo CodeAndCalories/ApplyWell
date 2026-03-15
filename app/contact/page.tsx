@@ -22,7 +22,7 @@ export default function ContactPage() {
         <section>
           <h2 className="text-sm font-semibold text-zinc-100 mb-2">Get in Touch</h2>
           <p className="text-sm text-zinc-400 leading-relaxed mb-4">
-            If you have questions about ApplyWell, refunds, or your application, contact us at:
+            If you have questions about ApplyWell or your application, contact us at:
           </p>
           <a
             href="mailto:support@applywell.io"
@@ -31,18 +31,6 @@ export default function ContactPage() {
             support@applywell.io
           </a>
           <p className="text-xs text-zinc-500 mt-2">Typically within 24–48 hours.</p>
-        </section>
-
-        {/* Refund requests */}
-        <section>
-          <h2 className="text-sm font-semibold text-zinc-100 mb-2">Refund Requests</h2>
-          <p className="text-sm text-zinc-400 leading-relaxed">
-            We offer a 30-day money-back guarantee. To request a refund, email{" "}
-            <a href="mailto:support@applywell.io" className="text-zinc-300 hover:text-zinc-100 underline underline-offset-2 transition-colors">
-              support@applywell.io
-            </a>{" "}
-            with the email address used when creating your application. A brief reason helps us improve but is not required.
-          </p>
         </section>
 
         {/* General questions */}
@@ -58,7 +46,6 @@ export default function ContactPage() {
         {[
           { label: "Privacy Policy",    href: "/privacy" },
           { label: "Terms of Service",  href: "/terms" },
-          { label: "Refund Policy",     href: "/refund" },
         ].map((l) => (
           <Link key={l.href} href={l.href} className="text-xs text-zinc-600 hover:text-zinc-400 transition-colors">
             {l.label}

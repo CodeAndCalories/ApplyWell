@@ -90,12 +90,16 @@ const FAQS = [
     a: "Yes. We're actively improving ApplyWell based on user feedback. Your $9 covers everything you need for your application.",
   },
   {
-    q: "Can I get a refund?",
-    a: "Yes. If ApplyWell doesn't help you, contact us within 30 days for a full refund. No questions asked.",
-  },
-  {
     q: "Do I need to create an account?",
     a: "No account needed. ApplyWell runs entirely in your browser. Your data is stored locally — we never see it.",
+  },
+  {
+    q: "Is my data private?",
+    a: "Yes. Everything you enter stays in your browser. Nothing is sent to a server or shared with third parties.",
+  },
+  {
+    q: "Does this work for Common App?",
+    a: "Yes. ApplyWell is designed around the Common App format — personal statements, activities lists, and school tracking all follow Common App structure.",
   },
 ];
 
@@ -870,7 +874,6 @@ export default function LandingPage() {
             { label: "Privacy",  href: "/privacy" },
             { label: "Terms",    href: "/terms" },
             { label: "Contact",  href: "/contact" },
-            { label: "Refund",   href: "/refund" },
             { label: "Guides",   href: "/guides" },
           ].map((l) => (
             <a key={l.href} href={l.href} className="text-xs text-zinc-700 hover:text-zinc-500 transition-colors">
