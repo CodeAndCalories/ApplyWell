@@ -62,16 +62,16 @@ const TESTIMONIALS = [
 
 // ── Comparison rows ───────────────────────────────────────────────────────────
 const COMPARISON = [
-  { counselor: "$150–$300 per hour",           applywell: "One-time $9, forever"          },
-  { counselor: "Availability limited",          applywell: "Available 24/7 in your browser" },
-  { counselor: "No guaranteed outcome",         applywell: "30-day money-back guarantee"    },
-  { counselor: "Requires scheduling",           applywell: "Instant access after purchase"  },
-  { counselor: "Recurring cost per session",   applywell: "All future updates included"    },
+  { counselor: "$150–$300 per hour",           applywell: "$9 per application — no subscription" },
+  { counselor: "Availability limited",          applywell: "Available 24/7 in your browser"       },
+  { counselor: "No guaranteed outcome",         applywell: "30-day money-back guarantee"          },
+  { counselor: "Requires scheduling",           applywell: "Instant access after purchase"        },
+  { counselor: "Recurring cost per session",   applywell: "Pay only when starting a new application" },
 ];
 
 // ── Trust signals ─────────────────────────────────────────────────────────────
 const TRUST = [
-  "One-time payment, lifetime access",
+  "$9 per application — no subscription",
   "Secure Stripe checkout",
   "Instant access after purchase",
   "30-day money-back guarantee",
@@ -82,11 +82,11 @@ const TRUST = [
 const FAQS = [
   {
     q: "Why is it only $9?",
-    a: "We built ApplyWell as an indie product with no VC funding and no marketing budget. That lets us keep prices honest. You get everything for a one-time $9 — no upsells, no subscriptions.",
+    a: "We built ApplyWell as an indie product with no VC funding and no marketing budget. That lets us keep prices honest. You get everything for a flat $9 per application — no upsells, no subscriptions.",
   },
   {
     q: "Will I get updates?",
-    a: "Yes. Your one-time purchase includes all future updates. We're actively improving the product based on user feedback.",
+    a: "Yes. We're actively improving ApplyWell based on user feedback. Your $9 covers everything you need for your application.",
   },
   {
     q: "Can I get a refund?",
@@ -220,7 +220,7 @@ export default function LandingPage() {
           <div className="mb-5">
             <span className="inline-flex items-center gap-1.5 bg-emerald-400/10 text-emerald-400 text-xs font-bold px-3.5 py-1.5 rounded-full border border-emerald-400/20">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              $9 one-time — no subscription ever
+              $9 per application — no subscription
             </span>
           </div>
 
@@ -233,7 +233,7 @@ export default function LandingPage() {
           {/* Subheadline */}
           <p className="text-zinc-400 text-base leading-relaxed mb-7 max-w-sm">
             ApplyWell helps you write stronger essays, track deadlines, and apply with confidence —
-            one-time $9, no subscription.
+            $9 per application, no subscription.
           </p>
 
           {/* Primary CTA */}
@@ -243,7 +243,7 @@ export default function LandingPage() {
 
           {/* Microcopy */}
           <p className="text-xs text-zinc-500 text-center mt-3 leading-relaxed">
-            No credit card required to start · One-time payment · Instant access
+            No credit card required to start · $9 per application · Instant access
           </p>
 
           {/* Hero visual — product mockup */}
@@ -283,6 +283,167 @@ export default function LandingPage() {
                 <div className="h-1 bg-zinc-800 rounded-full overflow-hidden">
                   <div className="h-full bg-gradient-to-r from-emerald-400 to-teal-400 rounded-full" style={{ width: "84%" }} />
                 </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ══════════════════════════════════════════════════════════════════════
+            DEMO PREVIEW
+        ══════════════════════════════════════════════════════════════════════ */}
+        <section className="py-6 border-t border-zinc-800/50">
+          <SectionLabel>See how ApplyWell works</SectionLabel>
+          <p className="text-zinc-500 text-sm leading-relaxed mb-4">
+            A quick look at a partially completed application built with ApplyWell.
+          </p>
+
+          {/* Outer card */}
+          <div className="bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden shadow-card-md">
+
+            {/* Fake browser chrome */}
+            <div className="bg-zinc-800/80 border-b border-zinc-700/60 px-4 py-2.5 flex items-center gap-2">
+              <div className="w-2.5 h-2.5 rounded-full bg-red-500/60" />
+              <div className="w-2.5 h-2.5 rounded-full bg-amber-400/60" />
+              <div className="w-2.5 h-2.5 rounded-full bg-emerald-400/60" />
+              <span className="text-[10px] text-zinc-500 ml-2 font-medium tracking-wide">
+                ApplyWell — Alex Rivera&apos;s Application
+              </span>
+            </div>
+
+            {/* Three-column grid — stacks on mobile */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-zinc-800">
+
+              {/* ── Column 1: Student Profile ─────────────────────────── */}
+              <div className="p-4">
+                <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-3">
+                  Student Profile
+                </p>
+
+                {/* Avatar row */}
+                <div className="flex items-center gap-2.5 mb-3.5">
+                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-400/40 to-emerald-400/30 border border-zinc-700 flex items-center justify-center text-xs font-bold text-zinc-200 flex-shrink-0">
+                    AR
+                  </div>
+                  <div>
+                    <div className="text-sm font-semibold text-zinc-100 leading-none">Alex Rivera</div>
+                    <div className="text-[10px] text-zinc-500 mt-0.5">Class of 2025</div>
+                  </div>
+                </div>
+
+                {/* Stats */}
+                <div className="flex flex-col gap-1.5 mb-3.5">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] text-zinc-500">GPA</span>
+                    <span className="text-xs font-semibold text-zinc-200">3.8</span>
+                  </div>
+                  <div className="h-px bg-zinc-800" />
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] text-zinc-500">Intended Major</span>
+                    <span className="text-xs font-semibold text-zinc-200">Computer Science</span>
+                  </div>
+                </div>
+
+                {/* Activities */}
+                <p className="text-[10px] text-zinc-600 mb-1.5 uppercase tracking-widest font-semibold">Activities</p>
+                <div className="flex flex-col gap-1.5">
+                  {["Robotics Club", "Track Team", "Volunteer Tutor"].map((a) => (
+                    <div key={a} className="flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400/70 flex-shrink-0" />
+                      <span className="text-[11px] text-zinc-400">{a}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* ── Column 2: Essays ──────────────────────────────────── */}
+              <div className="p-4">
+                <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-3">Essays</p>
+
+                {/* Prompt 1 — in progress */}
+                <div className="mb-3.5">
+                  <div className="flex items-center gap-1.5 mb-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 flex-shrink-0" />
+                    <span className="text-[10px] font-semibold text-zinc-400">Prompt 1</span>
+                    <span className="ml-auto text-[9px] text-emerald-500 font-medium">In progress</span>
+                  </div>
+                  <p className="text-[11px] font-medium text-zinc-300 mb-1.5 leading-snug">
+                    &ldquo;Describe a challenge you&apos;ve overcome.&rdquo;
+                  </p>
+                  <div className="bg-zinc-800/60 rounded-lg px-2.5 py-2 border border-zinc-700/40">
+                    <p className="text-[10px] text-zinc-400 leading-relaxed">
+                      During my sophomore year I struggled balancing academics and athletics. When my grades slipped, I realized I needed to completely rethink how I managed my time...
+                    </p>
+                  </div>
+                </div>
+
+                {/* Prompt 2 — blank */}
+                <div>
+                  <div className="flex items-center gap-1.5 mb-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-zinc-600 flex-shrink-0" />
+                    <span className="text-[10px] font-semibold text-zinc-500">Prompt 2</span>
+                    <span className="ml-auto text-[9px] text-zinc-600 font-medium">Not started</span>
+                  </div>
+                  <p className="text-[11px] font-medium text-zinc-500 mb-1.5 leading-snug">
+                    &ldquo;Why are you interested in this major?&rdquo;
+                  </p>
+                  <div className="bg-zinc-800/30 rounded-lg px-2.5 py-2 border border-dashed border-zinc-700/50">
+                    <p className="text-[10px] text-zinc-600 italic">Start writing your response...</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* ── Column 3: School List ─────────────────────────────── */}
+              <div className="p-4">
+                <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-3">School List</p>
+
+                <div className="flex flex-col gap-3">
+                  {/* UCLA */}
+                  <div className="flex items-start gap-2.5">
+                    <div className="w-4 h-4 rounded-full bg-emerald-400/15 border border-emerald-400/30 flex items-center justify-center text-emerald-400 flex-shrink-0 mt-0.5">
+                      <CheckIcon />
+                    </div>
+                    <div>
+                      <div className="text-xs font-semibold text-zinc-200 leading-none">UCLA</div>
+                      <div className="text-[10px] text-zinc-500 mt-0.5">Essays started</div>
+                    </div>
+                  </div>
+
+                  {/* UC Berkeley */}
+                  <div className="flex items-start gap-2.5">
+                    <div className="w-4 h-4 rounded-full bg-zinc-800 border border-zinc-700 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <div className="text-xs font-semibold text-zinc-500 leading-none">UC Berkeley</div>
+                      <div className="text-[10px] text-zinc-600 mt-0.5">Not started</div>
+                    </div>
+                  </div>
+
+                  {/* University of Washington */}
+                  <div className="flex items-start gap-2.5">
+                    <div className="w-4 h-4 rounded-full bg-emerald-400/15 border border-emerald-400/30 flex items-center justify-center text-emerald-400 flex-shrink-0 mt-0.5">
+                      <CheckIcon />
+                    </div>
+                    <div>
+                      <div className="text-xs font-semibold text-zinc-200 leading-none">U of Washington</div>
+                      <div className="text-[10px] text-zinc-500 mt-0.5">Profile complete</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* ── Progress bar footer ───────────────────────────────────── */}
+            <div className="border-t border-zinc-800 px-4 py-3.5">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-[10px] font-semibold text-zinc-400 uppercase tracking-wider">
+                  Application Progress
+                </span>
+                <span className="text-[10px] font-bold text-emerald-400">40% Complete</span>
+              </div>
+              <div className="bg-zinc-800 rounded-full h-1.5 overflow-hidden">
+                <div
+                  className="h-full rounded-full bg-gradient-to-r from-emerald-400 to-teal-400 transition-all duration-700"
+                  style={{ width: "40%" }}
+                />
               </div>
             </div>
           </div>
@@ -372,7 +533,7 @@ export default function LandingPage() {
                 <div className="text-[10px] font-bold text-emerald-500 uppercase tracking-widest">
                   ApplyWell
                 </div>
-                <div className="text-xs text-emerald-600 font-semibold mt-0.5">$9 one-time</div>
+                <div className="text-xs text-emerald-600 font-semibold mt-0.5">$9 per application</div>
               </div>
             </div>
 
@@ -485,11 +646,11 @@ export default function LandingPage() {
             <div className="flex items-end justify-between mb-5">
               <div>
                 <div className="font-semibold text-base text-zinc-100">ApplyWell Pro</div>
-                <div className="text-zinc-500 text-xs mt-0.5">One-time purchase · no subscription</div>
+                <div className="text-zinc-500 text-xs mt-0.5">$9 per application · no subscription</div>
               </div>
               <div className="text-right">
                 <div className="font-serif text-3xl text-zinc-100 leading-none">$9</div>
-                <div className="text-zinc-500 text-xs mt-0.5">one-time</div>
+                <div className="text-zinc-500 text-xs mt-0.5">per application</div>
               </div>
             </div>
 
