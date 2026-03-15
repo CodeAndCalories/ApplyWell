@@ -3,6 +3,7 @@ import "./globals.css";
 import { AppProvider } from "@/lib/context";
 import TopNav from "@/components/layout/TopNav";
 import SavedIndicator from "@/components/layout/SavedIndicator";
+import CookieNotice from "@/components/layout/CookieNotice";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://applywell.io"),
@@ -82,6 +83,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <SavedIndicator />
           <TopNav />
           <main className="max-w-xl mx-auto px-5 pb-12">{children}</main>
+          <CookieNotice />
         </AppProvider>
       </body>
     </html>

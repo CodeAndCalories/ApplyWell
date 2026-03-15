@@ -860,6 +860,18 @@ export default function LandingPage() {
           Writing tool only — not admissions advice. No outcome guarantees.<br />
           Data stays in your browser. Nothing is sent to a server.
         </p>
+        <div className="flex items-center justify-center flex-wrap gap-x-4 gap-y-1.5 mt-4">
+          {[
+            { label: "Privacy",  href: "/privacy" },
+            { label: "Terms",    href: "/terms" },
+            { label: "Contact",  href: "/contact" },
+            { label: "Refund",   href: "/refund" },
+          ].map((l) => (
+            <a key={l.href} href={l.href} className="text-xs text-zinc-700 hover:text-zinc-500 transition-colors">
+              {l.label}
+            </a>
+          ))}
+        </div>
       </div>
     </div>
   );
