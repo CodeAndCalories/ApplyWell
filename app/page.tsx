@@ -433,6 +433,11 @@ export default function LandingPage() {
                 badge: "AI Skills",
                 title: "AI skills for your resume: what students should list in 2026",
               },
+              {
+                href: "/common-app-activities-help",
+                badge: "Common App",
+                title: "How to write Common App activities that actually stand out",
+              },
             ].map((g) => (
               <Link
                 key={g.href}

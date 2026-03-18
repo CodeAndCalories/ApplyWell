@@ -42,6 +42,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      url: `${base}/common-app-activities-help`,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
       url: `${base}/guides/common-app-activities-examples`,
       changeFrequency: "monthly",
       priority: 0.8,
