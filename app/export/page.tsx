@@ -340,11 +340,11 @@ export default function ExportPage() {
 
         {/* Merge / Replace toggle */}
         <div className="flex items-center gap-2 mb-3">
-          <span className="text-xs text-zinc-500">Import mode:</span>
-          <div className="flex rounded-lg border border-zinc-700 overflow-hidden text-xs">
+          <span className="text-xs text-zinc-500 whitespace-nowrap">Import mode:</span>
+          <div className="flex rounded-lg border border-zinc-700 overflow-visible text-xs">
             <button
               onClick={() => setImportMode("merge")}
-              className={`px-3 py-1.5 transition-colors ${
+              className={`px-3 py-1.5 whitespace-nowrap min-w-[64px] transition-colors ${
                 importMode === "merge"
                   ? "bg-emerald-500/20 text-emerald-300"
                   : "text-zinc-500 hover:text-zinc-300"
@@ -354,7 +354,7 @@ export default function ExportPage() {
             </button>
             <button
               onClick={() => setImportMode("replace")}
-              className={`px-3 py-1.5 transition-colors border-l border-zinc-700 ${
+              className={`px-3 py-1.5 whitespace-nowrap min-w-[72px] transition-colors border-l border-zinc-700 ${
                 importMode === "replace"
                   ? "bg-red-500/20 text-red-300"
                   : "text-zinc-500 hover:text-zinc-300"
