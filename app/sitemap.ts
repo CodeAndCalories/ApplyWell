@@ -17,6 +17,31 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      url: `${base}/high-salary-remote-resume`,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${base}/first-job-resume-for-teens`,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${base}/college-resume-for-remote-jobs`,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${base}/no-subscription-resume-builder`,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${base}/ai-skills-for-students`,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
       url: `${base}/guides/common-app-activities-examples`,
       changeFrequency: "monthly",
       priority: 0.8,
