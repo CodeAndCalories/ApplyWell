@@ -8,7 +8,7 @@ import CookieNotice from "@/components/layout/CookieNotice";
 export const metadata: Metadata = {
   metadataBase: new URL("https://applywell.io"),
   title: {
-    default: "ApplyWell",
+    default: "ApplyWell | Resume Builder for Students & High-Salary Remote Jobs",
     template: "%s | ApplyWell",
   },
   description:

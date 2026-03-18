@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { useApp } from "@/lib/context";
 
 const STRIPE_URL = "https://buy.stripe.com/6oU7sKgSQ2K52hdcHt7g401";
@@ -262,8 +263,8 @@ export default function LandingPage() {
 
           {/* Headline */}
           <h1 className="font-serif text-[clamp(40px,9vw,60px)] leading-[1.06] mb-4 tracking-tight">
-            Build a College Application{" "}
-            <em className="text-emerald-400 not-italic">That Gets You In.</em>
+            Build a Resume That Gets You Hired —{" "}
+            <em className="text-emerald-400 not-italic">In Minutes.</em>
           </h1>
 
           {/* ATS badge */}
@@ -275,18 +276,23 @@ export default function LandingPage() {
 
           {/* Subheadline */}
           <p className="text-zinc-400 text-base leading-relaxed mb-7 max-w-sm">
-            ApplyWell helps you write stronger essays, track deadlines, and apply with confidence —
-            $9 per application, no subscription.
+            Used by students, parents, and first-time job seekers. $9 one-time — no subscription.
           </p>
 
-          {/* Primary CTA */}
+          {/* Primary CTAs */}
           <PrimaryButton href={STRIPE_URL}>
-            Start My Application — $9
+            Build My Resume — $9 one-time, no subscription
           </PrimaryButton>
+          <a
+            href="#college"
+            className="flex items-center justify-center w-full min-h-[48px] border border-zinc-700/80 text-zinc-400 hover:text-zinc-200 hover:border-zinc-500 font-semibold text-sm rounded-2xl transition-all px-6 mt-3"
+          >
+            College Application Help →
+          </a>
 
           {/* Microcopy */}
           <p className="text-xs text-zinc-500 text-center mt-3 leading-relaxed">
-            No credit card required to start · $9 per application · Instant access
+            No credit card required to start · $9 one-time · No subscription
           </p>
 
           {/* Hero visual — product mockup */}
@@ -392,9 +398,58 @@ export default function LandingPage() {
         </section>
 
         {/* ══════════════════════════════════════════════════════════════════════
-            DEMO PREVIEW
+            GUIDES
         ══════════════════════════════════════════════════════════════════════ */}
         <section className="py-10 border-t border-zinc-800/50">
+          <SectionLabel>Free guides</SectionLabel>
+          <div className="flex flex-col gap-3">
+            {[
+              {
+                href: "/high-salary-remote-resume",
+                badge: "Remote Jobs",
+                title: "What makes a resume stand out for high-salary remote jobs",
+              },
+              {
+                href: "/first-job-resume-for-teens",
+                badge: "Parent's Guide",
+                title: "A parent's guide to your teen's first resume",
+              },
+              {
+                href: "/college-resume-for-remote-jobs",
+                badge: "College",
+                title: "How college students land high-paying remote jobs",
+              },
+              {
+                href: "/no-subscription-resume-builder",
+                badge: "Pricing",
+                title: "The best resume builder with no subscription — why one-time wins",
+              },
+              {
+                href: "/ai-skills-for-students",
+                badge: "AI Skills",
+                title: "AI skills for your resume: what students should list in 2026",
+              },
+            ].map((g) => (
+              <Link
+                key={g.href}
+                href={g.href}
+                className="bg-zinc-900 border border-emerald-500/25 rounded-2xl p-4 shadow-card hover:border-emerald-500/50 transition-colors group"
+              >
+                <span className="text-[10px] font-bold text-emerald-400 uppercase tracking-widest mb-1.5 block">
+                  {g.badge}
+                </span>
+                <p className="text-sm font-semibold text-zinc-200 group-hover:text-zinc-100 leading-snug">
+                  {g.title} →
+                </p>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        {/* ══════════════════════════════════════════════════════════════════════
+            DEMO PREVIEW
+        ══════════════════════════════════════════════════════════════════════ */}
+        <section id="college" className="py-10 border-t border-zinc-800/50">
           <SectionLabel>See how ApplyWell works</SectionLabel>
           <p className="text-zinc-500 text-sm leading-relaxed mb-4">
             A quick look at a partially completed application built with ApplyWell.
