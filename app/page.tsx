@@ -276,8 +276,11 @@ export default function LandingPage() {
           </div>
 
           {/* Subheadline */}
-          <p className="text-zinc-400 text-base leading-relaxed mb-7 max-w-sm">
+          <p className="text-zinc-400 text-base leading-relaxed mb-3 max-w-sm">
             Used by students, parents, and first-time job seekers. $9 one-time — no subscription.
+          </p>
+          <p className="text-zinc-500 text-sm mt-1 mb-7 max-w-sm">
+            Most students finish their first resume in under 10 minutes.
           </p>
 
           {/* Primary CTAs */}

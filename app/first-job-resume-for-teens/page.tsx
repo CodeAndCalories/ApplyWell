@@ -239,6 +239,11 @@ export default function FirstJobResumeForTeensPage() {
               </div>
             ))}
           </div>
+          <p className="text-zinc-400 text-sm mt-3">
+            Bonus: ApplyWell&apos;s X-Y-Z bullet format works directly for Common App Activities
+            too. The same 150-character discipline that wins remote jobs is exactly what college
+            admissions officers want to see in your activity descriptions.
+          </p>
         </section>
 
         {/* ── 4. Trust section ────────────────────────────────────────────── */}

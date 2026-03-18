@@ -294,7 +294,12 @@ export default function HighSalaryRemoteResumePage() {
               Running your school's Instagram? That's content strategy and data analysis. Peer
               tutor? That's curriculum design and async communication.
             </p>
-            <div className="border-t border-zinc-800 pt-4">
+            <p className="text-zinc-400 text-sm mt-3">
+              Bonus: ApplyWell&apos;s X-Y-Z bullet format works directly for Common App Activities
+              too. The same 150-character discipline that wins remote jobs is exactly what college
+              admissions officers want to see in your activity descriptions.
+            </p>
+            <div className="border-t border-zinc-800 pt-4 mt-4">
               <p className="text-[11px] font-bold text-zinc-500 uppercase tracking-widest mb-2">
                 Quick checklist for student remote resumes
               </p>
