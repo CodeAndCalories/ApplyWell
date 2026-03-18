@@ -54,36 +54,12 @@ const faqSchema = {
 
 /* ── Comparison data ─────────────────────────────────────────────────────── */
 const COMPARISON = [
-  {
-    feature: "Price",
-    subscription: "$15–$30/month ($180–$360/year)",
-    applywell: "$9 one-time — no subscription",
-  },
-  {
-    feature: "PDF export",
-    subscription: "Often locked behind paid tier",
-    applywell: "Included — no watermark",
-  },
-  {
-    feature: "ATS optimization",
-    subscription: "Usually a premium upsell",
-    applywell: "Built in by default",
-  },
-  {
-    feature: "Account required",
-    subscription: "Always — email + password",
-    applywell: "Never — no login needed",
-  },
-  {
-    feature: "Data privacy",
-    subscription: "Stored on their servers",
-    applywell: "Stays in your browser only",
-  },
-  {
-    feature: "Cancellation risk",
-    subscription: "Easy to forget, hard to cancel",
-    applywell: "No subscription to cancel",
-  },
+  { feature: "Price",                  applywell: "$9 one-time",           competitor: "$25+/month",    competitorX: true  },
+  { feature: "4-year cost",            applywell: "$9",                    competitor: "$1,200+",       competitorX: true  },
+  { feature: "Subscription required",  applywell: "Never",                 competitor: "Yes",           competitorX: true  },
+  { feature: "Student-optimized",      applywell: "Yes",                   competitor: "No",            competitorX: true  },
+  { feature: "AI bullet optimizer",    applywell: "Included",              competitor: "Limited",       competitorX: false },
+  { feature: "Cancel to keep access",  applywell: "N/A — no subscription", competitor: "No",            competitorX: true  },
 ];
 
 /* ── Inline components ───────────────────────────────────────────────────── */
@@ -217,18 +193,18 @@ export default function NoSubscriptionResumeBuilderPage() {
 
         {/* ── 3. Comparison table ─────────────────────────────────────────── */}
         <section className="mb-10" aria-labelledby="comparison">
-          <SectionHeading>Subscription Builders vs. ApplyWell</SectionHeading>
+          <SectionHeading>ApplyWell vs. Zety / Resume.io</SectionHeading>
           <div className="bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden shadow-card">
             {/* Header row */}
             <div className="grid grid-cols-3 border-b border-zinc-800 bg-zinc-800/40">
               <div className="px-3 py-3 text-[10px] font-bold text-zinc-500 uppercase tracking-widest">
                 Feature
               </div>
-              <div className="px-3 py-3 text-[10px] font-bold text-zinc-500 uppercase tracking-widest border-l border-zinc-800">
-                Subscription builders
-              </div>
               <div className="px-3 py-3 text-[10px] font-bold text-emerald-500 uppercase tracking-widest border-l border-zinc-800">
                 ApplyWell
+              </div>
+              <div className="px-3 py-3 text-[10px] font-bold text-zinc-500 uppercase tracking-widest border-l border-zinc-800">
+                Zety / Resume.io
               </div>
             </div>
             {COMPARISON.map((row, i) => (
@@ -236,14 +212,14 @@ export default function NoSubscriptionResumeBuilderPage() {
                 key={row.feature}
                 className={`grid grid-cols-3 ${i < COMPARISON.length - 1 ? "border-b border-zinc-800/60" : ""}`}
               >
-                <div className="px-3 py-3 text-xs font-semibold text-zinc-400">{row.feature}</div>
-                <div className="px-3 py-3 flex items-start gap-1.5 border-l border-zinc-800/60">
-                  <span className="text-red-500/80 mt-0.5 flex-shrink-0"><XIcon /></span>
-                  <span className="text-xs text-zinc-500 leading-snug">{row.subscription}</span>
-                </div>
+                <div className="px-3 py-3 text-xs font-semibold text-zinc-400 leading-snug">{row.feature}</div>
                 <div className="px-3 py-3 flex items-start gap-1.5 border-l border-zinc-800/60 bg-emerald-400/3">
                   <span className="text-emerald-400 mt-0.5 flex-shrink-0"><CheckIcon /></span>
                   <span className="text-xs text-zinc-300 leading-snug">{row.applywell}</span>
+                </div>
+                <div className="px-3 py-3 flex items-start gap-1.5 border-l border-zinc-800/60">
+                  {row.competitorX && <span className="text-red-500/80 mt-0.5 flex-shrink-0"><XIcon /></span>}
+                  <span className="text-xs text-zinc-500 leading-snug">{row.competitor}</span>
                 </div>
               </div>
             ))}

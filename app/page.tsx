@@ -64,11 +64,12 @@ const TESTIMONIALS = [
 
 // ── Comparison rows ───────────────────────────────────────────────────────────
 const COMPARISON = [
-  { counselor: "$150–$300 per hour",           applywell: "$9 per application — no subscription" },
-  { counselor: "Availability limited",          applywell: "Available 24/7 in your browser"       },
-  { counselor: "No guaranteed outcome",         applywell: "30-day money-back guarantee"          },
-  { counselor: "Requires scheduling",           applywell: "Instant access after purchase"        },
-  { counselor: "Recurring cost per session",   applywell: "Pay only when starting a new application" },
+  { feature: "Price",                  applywell: "$9 one-time",           competitor: "$25+/month",    competitorX: true  },
+  { feature: "4-year cost",            applywell: "$9",                    competitor: "$1,200+",       competitorX: true  },
+  { feature: "Subscription required",  applywell: "Never",                 competitor: "Yes",           competitorX: true  },
+  { feature: "Student-optimized",      applywell: "Yes",                   competitor: "No",            competitorX: true  },
+  { feature: "AI bullet optimizer",    applywell: "Included",              competitor: "Limited",       competitorX: false },
+  { feature: "Cancel to keep access",  applywell: "N/A — no subscription", competitor: "No",            competitorX: true  },
 ];
 
 // ── Trust signals ─────────────────────────────────────────────────────────────
@@ -681,21 +682,18 @@ export default function LandingPage() {
             COMPARISON
         ══════════════════════════════════════════════════════════════════════ */}
         <section className="py-10 border-t border-zinc-800/50">
-          <SectionLabel>Why ApplyWell beats the alternative</SectionLabel>
+          <SectionLabel>ApplyWell vs Zety / Resume.io</SectionLabel>
           <div className="bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden shadow-card">
             {/* Column headers */}
-            <div className="grid grid-cols-2 border-b border-zinc-800">
-              <div className="px-4 py-3 border-r border-zinc-800">
-                <div className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">
-                  Hiring a counselor
-                </div>
-                <div className="text-xs text-zinc-600 mt-0.5">$150–$300/hr</div>
+            <div className="grid grid-cols-3 border-b border-zinc-800 bg-zinc-800/40">
+              <div className="px-3 py-3 text-[10px] font-bold text-zinc-500 uppercase tracking-widest">
+                Feature
               </div>
-              <div className="px-4 py-3 bg-emerald-400/5">
-                <div className="text-[10px] font-bold text-emerald-500 uppercase tracking-widest">
-                  ApplyWell
-                </div>
-                <div className="text-xs text-emerald-600 font-semibold mt-0.5">$9 per application</div>
+              <div className="px-3 py-3 text-[10px] font-bold text-emerald-500 uppercase tracking-widest border-l border-zinc-800">
+                ApplyWell
+              </div>
+              <div className="px-3 py-3 text-[10px] font-bold text-zinc-500 uppercase tracking-widest border-l border-zinc-800">
+                Zety / Resume.io
               </div>
             </div>
 
@@ -703,15 +701,18 @@ export default function LandingPage() {
             {COMPARISON.map((row, i) => (
               <div
                 key={i}
-                className={`grid grid-cols-2 ${i < COMPARISON.length - 1 ? "border-b border-zinc-800/60" : ""}`}
+                className={`grid grid-cols-3 ${i < COMPARISON.length - 1 ? "border-b border-zinc-800/60" : ""}`}
               >
-                <div className="flex items-center gap-2 px-4 py-3 border-r border-zinc-800/60">
-                  <span className="text-red-500/80 flex-shrink-0"><XIcon /></span>
-                  <span className="text-xs text-zinc-600 leading-snug">{row.counselor}</span>
+                <div className="px-3 py-3 text-xs font-semibold text-zinc-400 leading-snug">
+                  {row.feature}
                 </div>
-                <div className="flex items-center gap-2 px-4 py-3 bg-emerald-400/3">
-                  <span className="text-emerald-400 flex-shrink-0"><CheckIcon /></span>
+                <div className="flex items-start gap-1.5 px-3 py-3 border-l border-zinc-800/60 bg-emerald-400/3">
+                  <span className="text-emerald-400 mt-0.5 flex-shrink-0"><CheckIcon /></span>
                   <span className="text-xs text-zinc-300 leading-snug">{row.applywell}</span>
+                </div>
+                <div className="flex items-start gap-1.5 px-3 py-3 border-l border-zinc-800/60">
+                  {row.competitorX && <span className="text-red-500/80 mt-0.5 flex-shrink-0"><XIcon /></span>}
+                  <span className="text-xs text-zinc-500 leading-snug">{row.competitor}</span>
                 </div>
               </div>
             ))}
