@@ -1,6 +1,7 @@
 export const dynamic = 'force-static';
 
 import type { MetadataRoute } from "next";
+import { schools } from "@/data/schools";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = "https://applywell.io";
@@ -91,5 +92,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly",
       priority: 0.3,
     },
+    ...schools.map((s) => ({
+      url: `${base}/resume-templates/${s.slug}`,
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    })),
   ];
 }
