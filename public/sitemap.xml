@@ -1,12 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://applywell.io/</loc></url>
-  <url><loc>https://applywell.io/entries</loc></url>
-  <url><loc>https://applywell.io/resume</loc></url>
-  <url><loc>https://applywell.io/verify</loc></url>
-  <url><loc>https://applywell.io/export</loc></url>
-  <url><loc>https://applywell.io/college</loc></url>
-  <url><loc>https://applywell.io/college/activities</loc></url>
-  <url><loc>https://applywell.io/college/essays</loc></url>
-  <url><loc>https://applywell.io/college/review</loc></url>
+  <!-- Core -->
+  <url><loc>https://applywell.io/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://applywell.io/guides/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://applywell.io/blog/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+
+  <!-- pSEO landing pages -->
+  <url><loc>https://applywell.io/high-salary-remote-resume/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/first-job-resume-for-teens/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/college-resume-for-remote-jobs/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/no-subscription-resume-builder/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/ai-skills-for-students/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/common-app-activities-help/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+
+  <!-- Guides -->
+  <url><loc>https://applywell.io/guides/common-app-activities-examples/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/guides/how-to-write-common-app-essay/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/guides/college-application-resume-example/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/guides/how-to-describe-leadership-experience/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/guides/student-resume-verbs/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+
+  <!-- Blog posts -->
+  <url><loc>https://applywell.io/blog/first-resume-college-student/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/blog/resume-action-verbs/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/blog/extracurriculars-on-resume/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/blog/resume-no-experience/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/blog/common-app-activities-guide/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/blog/best-free-resume-builders-students/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/blog/cover-letter-first-internship/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/blog/linkedin-tips-college-students/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+
+  <!-- Resume templates by major (30) -->
+  <url><loc>https://applywell.io/resume-templates/computer-science/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/resume-templates/biology/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/resume-templates/business-administration/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/resume-templates/nursing/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/resume-templates/psychology/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/resume-templates/english/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/resume-templates/mechanical-engineering/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/resume-templates/accounting/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/resume-templates/political-science/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/resume-templates/communications/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/resume-templates/marketing/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/resume-templates/finance/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/resume-templates/economics/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/resume-templates/chemistry/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/resume-templates/graphic-design/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/resume-templates/education/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/resume-templates/pre-med/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/resume-templates/data-science/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/resume-templates/environmental-science/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/resume-templates/philosophy/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/resume-templates/sociology/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/resume-templates/mathematics/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/resume-templates/electrical-engineering/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/resume-templates/journalism/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/resume-templates/public-health/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/resume-templates/criminal-justice/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/resume-templates/art-history/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/resume-templates/music/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/resume-templates/architecture/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/resume-templates/international-relations/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+
+  <!-- Resume tips by job type (15) -->
+  <url><loc>https://applywell.io/resume-for/internship/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/resume-for/part-time-job/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/resume-for/first-job/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/resume-for/summer-job/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/resume-for/research-position/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/resume-for/campus-job/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/resume-for/remote-internship/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/resume-for/startup-internship/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/resume-for/government-internship/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/resume-for/nonprofit-internship/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/resume-for/freelance/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/resume-for/tutoring/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/resume-for/retail/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/resume-for/restaurant/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://applywell.io/resume-for/volunteer-position/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+
+  <!-- Legal -->
+  <url><loc>https://applywell.io/privacy/</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://applywell.io/terms/</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://applywell.io/contact/</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://applywell.io/refund/</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
 </urlset>
