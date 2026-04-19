@@ -2,10 +2,32 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "College Application Resume — Example & Format",
-  description:
-    "What to include on a college application resume, how to format it, and a full example layout for high school students.",
+  title: "College Application Resume Example (2026) — Ready in 10 Minutes",
+  description: "See a real college application resume example for high school students. Then build your own in minutes with ApplyWell — $9 one-time, no subscription.",
+  alternates: { canonical: "https://applywell.io/guides/college-application-resume-example" },
+  openGraph: {
+    title: "College Application Resume Example (2026) | ApplyWell",
+    description: "See a real college application resume example for high school students. Build yours in minutes — $9 one-time.",
+  },
 };
+
+const STRIPE_URL = "https://buy.stripe.com/6oU7sKgSQ2K52hdcHt7g401";
+
+function GuideCTA() {
+  return (
+    <div className="my-8 bg-zinc-900 border border-emerald-500/25 rounded-2xl p-5 shadow-card text-center">
+      <p className="text-sm font-semibold text-zinc-200 mb-1">Ready to build your resume?</p>
+      <p className="text-xs text-zinc-500 mb-4">$9 one-time · No account · Instant access</p>
+      <a
+        href={STRIPE_URL}
+        className="inline-flex items-center justify-center min-h-[48px] bg-emerald-400 hover:bg-emerald-300 hover:-translate-y-0.5 text-zinc-900 font-bold text-sm rounded-2xl transition-all px-8"
+        style={{ boxShadow: "0 4px 16px rgb(52 211 153 / 0.35)" }}
+      >
+        Build My Resume — $9
+      </a>
+    </div>
+  );
+}
 
 const SECTIONS = [
   {
@@ -53,9 +75,15 @@ export default function CollegeResumeExamplePage() {
         <section>
           <h2 className="text-sm font-semibold text-zinc-100 mb-2">Do You Need a Resume?</h2>
           <p className="text-sm text-zinc-400 leading-relaxed">
-            Most colleges don't require a resume — but many allow you to attach one as a supplement. A well-formatted resume gives admissions officers a clean overview of your accomplishments in one page, and can be a useful reference when writing your activities list and essays. Some scholarship applications and interview processes will ask for one directly.
+            Most colleges don't require a resume — but many allow you to attach one as a supplement. A well-formatted resume gives admissions officers a clean overview of your accomplishments in one page, and can be a useful reference when writing your activities list and essays. Some scholarship applications and interview processes will ask for one directly. If this is your first time writing a resume, our guide to{" "}
+            <Link href="/first-job-resume-for-teens" className="underline underline-offset-2 decoration-zinc-600 hover:decoration-zinc-400 transition-colors">
+              first job resume for teens
+            </Link>
+            {" "}covers every section from scratch.
           </p>
         </section>
+
+        <GuideCTA />
 
         <section>
           <h2 className="text-sm font-semibold text-zinc-100 mb-2">Format Rules</h2>
@@ -92,6 +120,8 @@ export default function CollegeResumeExamplePage() {
           </div>
         </section>
 
+        <GuideCTA />
+
         <section>
           <h2 className="text-sm font-semibold text-zinc-100 mb-3">What to Leave Off</h2>
           <ul className="flex flex-col gap-2">
@@ -113,7 +143,11 @@ export default function CollegeResumeExamplePage() {
         <section className="bg-zinc-900 border border-zinc-800 rounded-xl px-5 py-5">
           <h2 className="text-sm font-semibold text-zinc-100 mb-2">Build Your Resume in ApplyWell</h2>
           <p className="text-sm text-zinc-400 leading-relaxed mb-4">
-            ApplyWell's resume builder is designed for students applying to college. Add your experience, choose a template, and export a clean PDF — ready to attach to any application.
+            ApplyWell is a{" "}
+            <Link href="/no-subscription-resume-builder" className="underline underline-offset-2 decoration-zinc-600 hover:decoration-zinc-400 transition-colors">
+              resume builder with no subscription
+            </Link>
+            {" "}designed for students applying to college. Add your experience, choose a template, and export a clean PDF — ready to attach to any application.
           </p>
           <Link
             href="/"
@@ -123,6 +157,8 @@ export default function CollegeResumeExamplePage() {
           </Link>
         </section>
       </div>
+
+      <GuideCTA />
 
       <section className="mt-10">
         <h2 className="text-sm font-semibold text-zinc-100 mb-3">Related Guides</h2>
