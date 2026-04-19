@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useApp } from "@/lib/context";
@@ -186,8 +186,19 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 export default function LandingPage() {
   const { loadDemo } = useApp();
   const router       = useRouter();
-  const [upgraded,  setUpgraded] = useState(false);
-  const [openFaq,   setOpenFaq]  = useState<number | null>(null);
+  const [upgraded,     setUpgraded]     = useState(false);
+  const [openFaq,      setOpenFaq]      = useState<Set<number>>(new Set([0, 1]));
+  const [navCtaVisible, setNavCtaVisible] = useState(false);
+  const heroRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const threshold = heroRef.current?.offsetHeight ?? 500;
+      setNavCtaVisible(window.scrollY > threshold);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -228,6 +239,16 @@ export default function LandingPage() {
           >
             Open App →
           </button>
+          <a
+            href={STRIPE_URL}
+            className={`text-[11px] sm:text-xs font-bold bg-emerald-400 hover:bg-emerald-300 text-zinc-900 rounded-xl px-3 py-1.5 transition-all duration-300 whitespace-nowrap flex-shrink-0 ${
+              navCtaVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-1 pointer-events-none"
+            }`}
+            style={{ boxShadow: "0 2px 10px rgb(52 211 153 / 0.3)" }}
+            aria-hidden={!navCtaVisible}
+          >
+            Get ApplyWell — $9
+          </a>
         </div>
       </div>
 
@@ -253,7 +274,7 @@ export default function LandingPage() {
         {/* ══════════════════════════════════════════════════════════════════════
             HERO
         ══════════════════════════════════════════════════════════════════════ */}
-        <section className="py-12">
+        <section ref={heroRef} className="py-12">
           {/* Pill */}
           <div className="mb-5">
             <span className="inline-flex items-center gap-1.5 bg-emerald-400/10 text-emerald-400 text-xs font-bold px-3.5 py-1.5 rounded-full border border-emerald-400/20">
@@ -264,8 +285,8 @@ export default function LandingPage() {
 
           {/* Headline */}
           <h1 className="font-serif text-[clamp(40px,9vw,60px)] leading-[1.06] mb-4 tracking-tight">
-            Build a Resume That Gets You Hired —{" "}
-            <em className="text-emerald-400 not-italic">In Minutes.</em>
+            Never Written a Resume Before? This Builds It for You —{" "}
+            <em className="text-emerald-400 not-italic">$9, No Subscription Ever.</em>
           </h1>
 
           {/* ATS badge */}
@@ -289,14 +310,13 @@ export default function LandingPage() {
           </PrimaryButton>
           <a
             href="#college"
-            className="flex items-center justify-center w-full min-h-[48px] border border-zinc-700/80 text-zinc-400 hover:text-zinc-200 hover:border-zinc-500 font-semibold text-sm rounded-2xl transition-all px-6 mt-3"
+            className="block text-center text-xs text-zinc-600 hover:text-zinc-400 transition-colors mt-4"
           >
             College Application Help →
           </a>
 
-          {/* Microcopy */}
-          <p className="text-xs text-zinc-500 text-center mt-3 leading-relaxed">
-            No credit card required to start · $9 one-time · No subscription
+          <p className="text-center text-xs text-zinc-600 mt-3">
+            No accounts. No data stored. Runs in your browser.
           </p>
 
           {/* Hero visual — product mockup */}
@@ -399,6 +419,43 @@ export default function LandingPage() {
           <p className="text-center text-xs text-zinc-500 italic">
             Same experience. Completely different impression.
           </p>
+        </section>
+
+        {/* ══════════════════════════════════════════════════════════════════════
+            HOW IT WORKS
+        ══════════════════════════════════════════════════════════════════════ */}
+        <section className="py-10 border-t border-zinc-800/50">
+          <SectionLabel>How it works</SectionLabel>
+          <h2 className="font-serif text-2xl tracking-tight mb-8">Done in three steps.</h2>
+          <div className="flex flex-col gap-6">
+            {[
+              {
+                step: "1",
+                title: "Fill In Your Info",
+                body: "Answer a few simple questions about your experience, activities, and goals.",
+              },
+              {
+                step: "2",
+                title: "We Rewrite It for You",
+                body: "ApplyWell formats and rewrites your bullet points to sound professional and ATS-ready.",
+              },
+              {
+                step: "3",
+                title: "Download & Apply",
+                body: "Export your resume as PDF or DOCX — no watermark, ready to submit.",
+              },
+            ].map((s) => (
+              <div key={s.step} className="flex items-start gap-4">
+                <div className="w-8 h-8 rounded-full bg-emerald-400/10 border border-emerald-400/25 flex items-center justify-center text-emerald-400 font-bold text-sm flex-shrink-0 mt-0.5">
+                  {s.step}
+                </div>
+                <div>
+                  <div className="font-semibold text-zinc-100 text-sm mb-1">{s.title}</div>
+                  <div className="text-zinc-500 text-sm leading-relaxed">{s.body}</div>
+                </div>
+              </div>
+            ))}
+          </div>
         </section>
 
         {/* ══════════════════════════════════════════════════════════════════════
@@ -842,6 +899,10 @@ export default function LandingPage() {
               Get ApplyWell — $9
             </PrimaryButton>
 
+            <p className="text-center text-xs text-zinc-500 mt-3 leading-relaxed">
+              Try it. If you don&apos;t love your resume, we&apos;ll refund you — no questions asked.
+            </p>
+
             <p className="text-center text-xs text-zinc-600 mt-2.5">
               30-day money-back guarantee. No questions asked.
             </p>
@@ -860,20 +921,20 @@ export default function LandingPage() {
                 className="bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden shadow-card"
               >
                 <button
-                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                  onClick={() => setOpenFaq(prev => { const next = new Set(prev); next.has(i) ? next.delete(i) : next.add(i); return next; })}
                   className="w-full flex items-center justify-between px-4 py-4 text-left text-sm font-semibold text-zinc-200 hover:text-zinc-100 transition-colors min-h-[48px]"
-                  aria-expanded={openFaq === i}
+                  aria-expanded={openFaq.has(i)}
                 >
                   <span>{item.q}</span>
                   <span className="text-zinc-600 flex-shrink-0 ml-3">
-                    {openFaq === i ? (
+                    {openFaq.has(i) ? (
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
                     ) : (
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
                     )}
                   </span>
                 </button>
-                {openFaq === i && (
+                {openFaq.has(i) && (
                   <div className="px-4 pb-4 text-sm text-zinc-500 leading-relaxed border-t border-zinc-800 pt-3 animate-fade-in">
                     {item.a}
                   </div>

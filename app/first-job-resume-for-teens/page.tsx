@@ -4,14 +4,14 @@ import { PageHeader, Disclaimer } from "@/components/ui";
 
 /* ── Metadata ────────────────────────────────────────────────────────────── */
 export const metadata: Metadata = {
-  title: "A Parent's Guide to Your Teen's First Resume (2026)",
+  title: "First Job Resume for Teens (No Experience Needed) — Done in Minutes",
   description:
-    "Most teen resumes are rejected before a human sees them. Learn how to help your student build a first resume that actually gets noticed — for any job, local or remote.",
+    "Never written a resume before? ApplyWell builds your teen's first resume in minutes. ATS-friendly, no account needed, $9 one-time.",
   alternates: { canonical: "https://applywell.io/first-job-resume-for-teens" },
   openGraph: {
-    title: "A Parent's Guide to Your Teen's First Resume (2026) | ApplyWell",
+    title: "First Job Resume for Teens (No Experience Needed) | ApplyWell",
     description:
-      "Most teen resumes are rejected before a human sees them. Learn how to help your student build a first resume that actually gets noticed — for any job, local or remote.",
+      "Never written a resume before? ApplyWell builds your teen's first resume in minutes. ATS-friendly, no account needed, $9 one-time.",
     url: "https://applywell.io/first-job-resume-for-teens",
     type: "article",
   },
@@ -52,7 +52,25 @@ const faqSchema = {
   })),
 };
 
+const STRIPE_URL = "https://buy.stripe.com/6oU7sKgSQ2K52hdcHt7g401";
+
 /* ── Inline components ───────────────────────────────────────────────────── */
+function GuideCTA() {
+  return (
+    <div className="my-8 bg-zinc-900 border border-emerald-500/25 rounded-2xl p-5 shadow-card text-center">
+      <p className="text-sm font-semibold text-zinc-200 mb-1">Ready to build your resume?</p>
+      <p className="text-xs text-zinc-500 mb-4">$9 one-time · No account · Instant access</p>
+      <a
+        href={STRIPE_URL}
+        className="inline-flex items-center justify-center min-h-[48px] bg-emerald-400 hover:bg-emerald-300 hover:-translate-y-0.5 text-zinc-900 font-bold text-sm rounded-2xl transition-all px-8"
+        style={{ boxShadow: "0 4px 16px rgb(52 211 153 / 0.35)" }}
+      >
+        Build My Resume — $9
+      </a>
+    </div>
+  );
+}
+
 function CTAButton() {
   return (
     <Link
@@ -134,6 +152,8 @@ export default function FirstJobResumeForTeensPage() {
             </p>
           </div>
         </section>
+
+        <GuideCTA />
 
         {/* ── 2. What employers want ──────────────────────────────────────── */}
         <section className="mb-10" aria-labelledby="what-employers-want">
@@ -242,9 +262,15 @@ export default function FirstJobResumeForTeensPage() {
           <p className="text-zinc-400 text-sm mt-3">
             Bonus: ApplyWell&apos;s X-Y-Z bullet format works directly for Common App Activities
             too. The same 150-character discipline that wins remote jobs is exactly what college
-            admissions officers want to see in your activity descriptions.
+            admissions officers want to see in a strong{" "}
+            <Link href="/guides/college-application-resume-example" className="underline underline-offset-2 decoration-zinc-600 hover:decoration-zinc-400 transition-colors">
+              college application resume
+            </Link>
+            .
           </p>
         </section>
+
+        <GuideCTA />
 
         {/* ── 4. Trust section ────────────────────────────────────────────── */}
         <section className="mb-10" aria-labelledby="trust">
@@ -255,7 +281,11 @@ export default function FirstJobResumeForTeensPage() {
             <Disclaimer>
               ApplyWell stores everything in your browser — no account, no login, no data ever
               sent to a server. Unlike ad-supported free builders, we don't sell your student's
-              information or display career ads. One $9 payment, no subscription, no upsell.
+              information or display career ads. One $9 payment,{" "}
+              <Link href="/no-subscription-resume-builder" className="underline underline-offset-2 decoration-zinc-600 hover:decoration-zinc-400 transition-colors">
+                no subscription
+              </Link>
+              , no upsell.
             </Disclaimer>
           </div>
 
@@ -322,6 +352,8 @@ export default function FirstJobResumeForTeensPage() {
             No account required · Data stays in your browser · 30-day guarantee
           </p>
         </section>
+
+        <GuideCTA />
 
         {/* ── Internal links ───────────────────────────────────────────────── */}
         <section aria-label="Related guides">

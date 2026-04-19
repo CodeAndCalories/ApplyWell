@@ -4,14 +4,14 @@ import { PageHeader, Disclaimer } from "@/components/ui";
 
 /* ── Metadata ────────────────────────────────────────────────────────────── */
 export const metadata: Metadata = {
-  title: "Best No-Subscription Resume Builder for Students (2026)",
+  title: "No Subscription Resume Builder — Pay Once ($9), Download Forever",
   description:
-    "Compare the best resume builders with no subscription. See why a one-time payment beats monthly fees for students and first-time job seekers in 2026.",
+    "Tired of $25/month resume builders? ApplyWell is $9 one-time. Build your resume, download it, keep it forever. No account, no subscription.",
   alternates: { canonical: "https://applywell.io/no-subscription-resume-builder" },
   openGraph: {
-    title: "Best No-Subscription Resume Builder for Students (2026) | ApplyWell",
+    title: "No Subscription Resume Builder — Pay Once ($9) | ApplyWell",
     description:
-      "Compare the best resume builders with no subscription. See why a one-time payment beats monthly fees for students and first-time job seekers in 2026.",
+      "Tired of $25/month resume builders? ApplyWell is $9 one-time. No account, no subscription. Download and keep forever.",
     url: "https://applywell.io/no-subscription-resume-builder",
     type: "article",
   },
