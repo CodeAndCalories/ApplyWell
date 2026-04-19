@@ -9,6 +9,18 @@ export const metadata: Metadata = {
 
 const GUIDES = [
   {
+    href: "/guides/free-ai-courses-for-teens/",
+    title: "Free AI Courses for Teens (2026) — Add These to Your Resume",
+    description:
+      "The best free AI courses for high school students, plus how to word each skill on your resume.",
+  },
+  {
+    href: "/guides/ai-skills/prompt-engineering/",
+    title: "AI Skills for Your Resume — What Students Should List in 2026",
+    description:
+      "Which AI skills employers actually want, and how to describe them professionally on your resume.",
+  },
+  {
     href: "/guides/common-app-activities-examples",
     title: "Common App Activities — Examples & Tips",
     description:
