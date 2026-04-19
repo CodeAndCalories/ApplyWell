@@ -2,6 +2,7 @@ export const dynamic = 'force-static';
 
 import type { MetadataRoute } from "next";
 import { schools } from "@/data/schools";
+import { SKILLS } from "@/app/guides/ai-skills/[skill]/skills-data";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = "https://applywell.io";
@@ -78,6 +79,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.8,
     },
+    ...SKILLS.map((s) => ({
+      url: `${base}/guides/ai-skills/${s.slug}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
     {
       url: `${base}/privacy`,
       changeFrequency: "yearly",
