@@ -32,6 +32,8 @@ export async function generateMetadata({
   };
 }
 
+const STRIPE_URL = "https://buy.stripe.com/6oU7sKgSQ2K52hdcHt7g401";
+
 /* ── Helpers ─────────────────────────────────────────────────────────────── */
 function schoolArticle(name: string): string {
   const vowelSlugs = ["emory", "indiana", "ohio-state", "asu", "uiuc", "uva", "umd", "umn", "uf", "ucf", "usc", "ucla", "uc-berkeley", "uw-madison", "uw-seattle", "upenn"];
@@ -40,13 +42,21 @@ function schoolArticle(name: string): string {
 
 function CTAButton({ schoolName }: { schoolName: string }) {
   return (
-    <Link
-      href="/"
-      className="flex items-center justify-center w-full min-h-[52px] bg-emerald-400 hover:bg-emerald-300 hover:-translate-y-0.5 text-zinc-900 font-bold text-sm rounded-2xl transition-all px-6"
-      style={{ boxShadow: "0 4px 16px rgb(52 211 153 / 0.35)" }}
-    >
-      Build your {schoolName} resume in minutes — free for students
-    </Link>
+    <div className="my-8 bg-zinc-900 border border-emerald-500/25 rounded-2xl p-5 shadow-card text-center">
+      <p className="text-sm font-semibold text-zinc-200 mb-1">
+        Ready to build your {schoolName} resume?
+      </p>
+      <p className="text-xs text-zinc-500 mb-4">
+        $9 one-time · No account · Instant access
+      </p>
+      <a
+        href={STRIPE_URL}
+        className="inline-flex items-center justify-center min-h-[48px] bg-emerald-400 hover:bg-emerald-300 hover:-translate-y-0.5 text-zinc-900 font-bold text-sm rounded-2xl transition-all px-8"
+        style={{ boxShadow: "0 4px 16px rgb(52 211 153 / 0.35)" }}
+      >
+        Build My Resume — $9
+      </a>
+    </div>
   );
 }
 
@@ -109,8 +119,11 @@ export default async function SchoolResumeTemplatePage({
             id="page-title"
             className="font-serif text-3xl tracking-tight text-zinc-100 mb-3 leading-tight"
           >
-            Resume Template for {school.name} Students
+            Resume Template for {school.name.replace(" University", "").replace(" College", "")} Students
           </h1>
+          <p className="text-xs text-zinc-500 mt-2">
+            Highly selective · Build a resume that stands out
+          </p>
           <p className="text-sm text-zinc-400 leading-relaxed mb-8">
             {school.name} is known for{" "}
             <span className="text-zinc-300">{strength1}</span>,{" "}
@@ -134,6 +147,8 @@ export default async function SchoolResumeTemplatePage({
             </p>
           </div>
         </section>
+
+        <CTAButton schoolName={school.name.replace(" University", "").replace(" College", "")} />
 
         {/* What recruiters look for */}
         <section className="mb-10" aria-labelledby="recruiters-section">
