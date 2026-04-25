@@ -79,6 +79,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.8,
     },
+    {
+      url: `${base}/resume-examples/teenager-first-job`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
     ...SKILLS.map((s) => ({
       url: `${base}/guides/ai-skills/${s.slug}`,
       lastModified: new Date(),
